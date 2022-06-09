@@ -25,9 +25,9 @@ public class MainPanel extends JPanel {
 		g.fillRect (150,50,980,200);
 		
 		g.setColor (Color.RED);
-		TitleFont = new Font("Arial", Font.BOLD, 300);
+		TitleFont = new Font("Arial", Font.BOLD, 170);
 		g.setFont (TitleFont);
-		g.drawString ("Connect 4", 200,150);
+		g.drawString ("Connect 4", 200,180);
 	}
 	
 	// Constructor
