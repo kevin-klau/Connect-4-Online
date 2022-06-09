@@ -6,12 +6,13 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
-public class MainPanel extends JPanel {
+public class MainPanel extends JPanel{
 	// Properties
 	BufferedImage Background;
 	BufferedImage P1Piece;
 	
 	Font TitleFont;
+	Font TextFont;
 	
 	// Methods
 	public void paintComponent (Graphics g){
@@ -28,6 +29,21 @@ public class MainPanel extends JPanel {
 		TitleFont = new Font("Arial", Font.BOLD, 180);
 		g.setFont (TitleFont);
 		g.drawString ("Connect 4", 200,210);
+		
+		// Add the Area where you ask for IP Adress, Port, And User
+		g.setColor (Color.WHITE);
+		g.fillRect (50,280, 820, 270);
+		g.setColor (Color.BLACK);
+		TextFont = new Font("Arial", Font.BOLD, 25);
+		g.setFont (TextFont);
+		g.drawString ("IP Address:", 190,320);
+		g.drawString ("Port:", 635,320);
+		g.drawString ("Username:", 390, 410+10+5);
+		
+		// Add the Border between the area and theme chooser
+		g.setColor (Color.BLACK);
+		g.fillRect (900, 280, 5, 350-30);
+		
 	}
 	
 	// Constructor
