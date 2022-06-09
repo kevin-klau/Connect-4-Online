@@ -8,13 +8,26 @@ import java.awt.image.BufferedImage;
 
 public class MainPanel extends JPanel {
 	// Properties
-	BufferedImage Image;
+	BufferedImage Background;
+	BufferedImage P1Piece;
 	
+	Font TitleFont;
 	
 	// Methods
 	public void paintComponent (Graphics g){
 		super.paintComponent(g);	
-		g.drawImage (Image, 0,0,this);
+		
+		// Draw the Background
+		g.drawImage (Background, 0,0,this);
+		
+		// Draw the Connect 4 Title
+		g.setColor (new Color (225,242,135));
+		g.fillRect (150,50,980,200);
+		
+		g.setColor (Color.RED);
+		TitleFont = new Font("Arial", Font.BOLD, 300);
+		g.setFont (TitleFont);
+		g.drawString ("Connect 4", 200,150);
 	}
 	
 	// Constructor
@@ -22,7 +35,8 @@ public class MainPanel extends JPanel {
 		super();
 		
 		try{
-			Image = ImageIO.read(new File("Themes/Halloween/P1.png"));
+			Background = ImageIO.read(new File("Themes/Default/BG.png"));
+			P1Piece = ImageIO.read (new File ("Themes/Default/P1.png"));
 		}catch(IOException e){
 			System.out.println("IMAGE UNABLE TO LOAD");
 		}
