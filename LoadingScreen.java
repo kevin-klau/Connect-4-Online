@@ -25,8 +25,9 @@ public void paintComponent(Graphics g){
 public LoadingScreen(){
 		super();
 		try{
-			spinnerPiece = ImageIO.read(new File("diagram.png"));
+			spinnerPiece = ImageIO.read(new File("D:/GitHub/ICSCPT2022/Themes/Halloween/P2.png"));
 		}catch(IOException e){
+			e.printStackTrace();
 			System.out.println("Unable to load diagram");
 		}
 	}
