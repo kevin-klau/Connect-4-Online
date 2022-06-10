@@ -26,7 +26,10 @@ public class GameScreenPanel extends JPanel{
 	int intP1XMove;
 	int intP1YMove;
 	
-	
+	//Array for Tile slots
+	int intCount;
+	int intCounter;
+	String strSlot[][] = new String [6][7];
 	
 	
 	//Methods
@@ -45,6 +48,16 @@ public class GameScreenPanel extends JPanel{
 	
 		intP1X = intP1X  + intP1XMove;
 		intP1Y = intP1Y  + intP1YMove;
+		
+		//Array Slots Set as Empty by Default
+		for(intCounter = 0; intCounter < 6; intCounter++){
+			for(intCount = 0; intCount < 7; intCount++){
+				strSlot[intCounter][intCount] = "empty";
+							
+			}
+		}
+		
+		
 			
 	
 	}
