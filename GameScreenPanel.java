@@ -38,7 +38,7 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(Board, 240, 70 + 100, null);
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
 		
-		g.drawImage(P1, intP1X, intP1Y, null);
+		g.drawImage(P1, intP1X-25, intP1Y-25, null);
 		
 		
 		//Tile Move
