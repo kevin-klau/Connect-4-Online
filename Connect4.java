@@ -141,7 +141,7 @@ public class Connect4 implements ActionListener{
 		theThemesList.setEditable (false);
 		theThemesList.addActionListener (this);
 		theThemesList.setVisible (true);
-		//theThemeslist.setSize (400,400);
+		theThemesList.setSize (400,400);
 		theMainPanel.add (theThemesList);
 		
 		
