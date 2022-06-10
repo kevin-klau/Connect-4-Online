@@ -32,13 +32,13 @@ public class MainPanel extends JPanel{
 		
 		// Add the Area where you ask for IP Adress, Port, And User
 		g.setColor (Color.WHITE);
-		g.fillRect (50,280, 820, 270);
+		g.fillRect (50,280+20, 820, 230);
 		g.setColor (Color.BLACK);
 		TextFont = new Font("Arial", Font.BOLD, 25);
 		g.setFont (TextFont);
-		g.drawString ("IP Address:", 190,320);
-		g.drawString ("Port:", 635,320);
-		g.drawString ("Username:", 390, 410+10+5);
+		g.drawString ("IP Address:", 190,320+20);
+		g.drawString ("Port:", 635,320+20);
+		g.drawString ("Username:", 390, 410+10+5+20);
 		
 		// Add the Border between the area and theme chooser
 		g.setColor (Color.BLACK);
