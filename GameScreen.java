@@ -24,11 +24,35 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	
 	
 	public void mouseMoved(MouseEvent evt){
-	
+		
 	}
 	
 	public void mouseDragged(MouseEvent evt){
-	
+		
+	/*
+		//Test Move a tile X
+		int intX = evt.getX();
+		int intY = evt.getY();
+		if(intX > GSPanel.intP1X + 50){
+			GSPanel.intP1XMove = +10;
+		}else if(intX <= GSPanel.intP1X){
+			GSPanel.intP1XMove = -10;
+		}else{
+			GSPanel.intP1XMove = 0;
+		}
+		
+		//Test Move a tile Y
+		if(intY > GSPanel.intP1Y + 50){
+			GSPanel.intP1YMove = +10;
+		}else if(intY <= GSPanel.intP1Y){
+			GSPanel.intP1YMove = -10;
+		}else{
+			GSPanel.intP1YMove = 0;
+		}
+		*/
+		//Moving tile
+		GSPanel.intP1X = evt.getX();
+		GSPanel.intP1Y = evt.getY();
 	}
 	
 	
@@ -55,7 +79,22 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	}
 	
 	public void mouseReleased(MouseEvent evt){
-		
+		//Tile Drop Test
+		if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 && GSPanel.intP1X <= 240 + 22 + 65  ){
+			GSPanel.intP1X = 0;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 + 65 && GSPanel.intP1X <= 240 + 22 + 65 + 65  ){
+			GSPanel.intP1X = 200;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 327 + 65 && GSPanel.intP1X <= 392 + 65  ){
+			GSPanel.intP1X = 500;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 392+65 && GSPanel.intP1X <= 457 + 65  ){
+			GSPanel.intP1X = 800;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 457 + 65 && GSPanel.intP1X <= 522 + 65  ){
+			GSPanel.intP1X = 1000;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 522 + 65 && GSPanel.intP1X <= 587 + 65  ){
+			GSPanel.intP1Y = 400;
+		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 587 + 65 && GSPanel.intP1X <= 652 + 65  ){
+			GSPanel.intP1Y = 700;
+		}
 	}
 	
 	public void mousePressed(MouseEvent evt){

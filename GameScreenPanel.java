@@ -20,6 +20,13 @@ public class GameScreenPanel extends JPanel{
 	BufferedImage P1 = null;
 	BufferedImage P2 = null;
 	
+	int intP1X = 106 + 358;
+	int intP1Y = 70 + 435 + 100;
+	
+	int intP1XMove;
+	int intP1YMove;
+	
+	
 	
 	
 	//Methods
@@ -28,8 +35,17 @@ public class GameScreenPanel extends JPanel{
 		
 		g.drawImage(BG, 0, 0, null);
 		
-		g.drawImage(Board, 240, 70, null);
-		g.drawImage(Tray, 240 - 134, 70 + 435, null);
+		g.drawImage(Board, 240, 70 + 100, null);
+		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
+		
+		g.drawImage(P1, intP1X, intP1Y, null);
+		
+		
+		//Tile Move
+	
+		intP1X = intP1X  + intP1XMove;
+		intP1Y = intP1Y  + intP1YMove;
+			
 	
 	}
 	//Constructor
