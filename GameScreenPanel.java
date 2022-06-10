@@ -19,6 +19,7 @@ public class GameScreenPanel extends JPanel{
 	BufferedImage Tray = null;
 	BufferedImage P1 = null;
 	BufferedImage P2 = null;
+	BufferedImage Blank = null;
 	
 	int intP1X = 106 + 358;
 	int intP1Y = 70 + 435 + 100;
@@ -31,11 +32,21 @@ public class GameScreenPanel extends JPanel{
 	int intCounter;
 	String strSlot[][] = new String [6][7];
 	
+	//Tile Dropped Variables
+	int intDropped1 = 0; 
+	int intDropped2 = 0; 
+	int intDropped3 = 0; 
+	int intDropped4 = 0; 
+	int intDropped5 = 0; 
+	int intDropped6 = 0; 
+	int intDropped7 = 0; 
+	
 	
 	//Methods
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
+		//Asset Drawings
 		g.drawImage(BG, 0, 0, null);
 		
 		g.drawImage(Board, 240, 70 + 100, null);
@@ -45,9 +56,30 @@ public class GameScreenPanel extends JPanel{
 		
 		
 		//Tile Move
-	
 		intP1X = intP1X  + intP1XMove;
 		intP1Y = intP1Y  + intP1YMove;
+		
+		//Filling Slots
+		/*
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("empty")){
+						
+						
+						g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+						
+						
+						
+					}
+				}
+			}
+		*/
+			
+	
+	}
+	//Constructor
+	public GameScreenPanel(){
+		super();
 		
 		//Array Slots Set as Empty by Default
 		for(intCounter = 0; intCounter < 6; intCounter++){
@@ -58,13 +90,7 @@ public class GameScreenPanel extends JPanel{
 		}
 		
 		
-			
-	
-	}
-	//Constructor
-	public GameScreenPanel(){
-		super();
-		
+		//Images
 		try{
 			BG = ImageIO.read(new File ("BG.png"));
 		}catch(IOException e){
@@ -91,6 +117,12 @@ public class GameScreenPanel extends JPanel{
 		
 		try{
 			P2 = ImageIO.read(new File ("P2.png"));
+		}catch(IOException e){
+			System.out.println("Invalid picture");
+		}
+		
+		try{
+			Blank = ImageIO.read(new File ("Blank.png"));
 		}catch(IOException e){
 			System.out.println("Invalid picture");
 		}
