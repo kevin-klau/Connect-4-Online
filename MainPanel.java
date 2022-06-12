@@ -47,13 +47,13 @@ public class MainPanel extends JPanel{
 		g.fillRect (900, 280, 5, 350-30);
 		
 		// Add the Piece Prewview
-		g.drawImage (P1Piece, 995,330,this);
+		g.drawImage (P1Piece, 955,350+40,this);
 		
 		// Load the images, if the theme changes, it'll change along as well
 		if (blnImagesLoadOnce == false){
 			try{
 				Background = ImageIO.read(new File("Themes/"+strThemes+"/BG.png"));
-				P1Piece = ImageIO.read (new File ("Themes/"+strThemes+"/P1.png"));
+				P1Piece = ImageIO.read (new File ("Themes/"+strThemes+"/PreviewIcon.png"));
 			}catch(IOException e){
 				System.out.println("IMAGE UNABLE TO LOAD");
 			}

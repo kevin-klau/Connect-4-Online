@@ -6,23 +6,28 @@ import javax.swing.event.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.net.*;
 
 public class Connect4 implements ActionListener{
 	// Properties
+	// Main JCompoennts
 	JFrame theFrame = new JFrame ("Connect 4");
 	MainPanel theMainPanel = new MainPanel ();
 	Timer theTimer = new Timer (1000/60, this);
 	
+	// SuperSocketMaster
+	SuperSocketMaster ssm;
+	
+	// Main Panel Components
 	JTextField theIPAsk = new JTextField ();
 	JTextField thePortAsk = new JTextField ();
 	JTextField theUserAsk = new JTextField ();
-	
 	JButton theConnectServerButton = new JButton ("Create Server");
 	JButton theConnectClientButton = new JButton ("Connect as Client");
-	
 	JComboBox<String> theThemesList;
-	
+	JButton theConnectButton = new JButton ("Play!!!");
 	String strTheme = "Default";
+	String strPersonConnect = "";
 	
 	// Methods
 	public void actionPerformed (ActionEvent evt){
@@ -30,12 +35,49 @@ public class Connect4 implements ActionListener{
 		if (evt.getSource() == theTimer){
 			theMainPanel.repaint();
 		
-		
 		// If they use the JComboBox to change themes
 		}else if (evt.getSource() == theThemesList){
 			// Change it so the theme changes
 			theMainPanel.strThemes = (String)theThemesList.getSelectedItem();
 			theMainPanel.blnImagesLoadOnce = false;
+			
+		}else if (evt.getSource() == theConnectServerButton){
+			// Indicate whether or not they are connecting as a server or client
+			if (!theUserAsk.getText().equalsIgnoreCase ("")){
+				strPersonConnect = "Server";
+				theConnectButton.setEnabled (true);
+			}
+			
+		}else if (evt.getSource() == theConnectClientButton){
+			// Indicate whether or not they are connecting as a server or client
+			if (!theUserAsk.getText().equalsIgnoreCase ("")){
+				strPersonConnect = "Client";
+				theConnectButton.setEnabled (true);	
+			}
+			
+		}else if (evt.getSource() == theConnectButton){
+			boolean blnConnected;
+			// Connect to SuperSocket Master
+			if (strPersonConnect.equalsIgnoreCase ("Client")){
+				// Connect Client
+				ssm = new SuperSocketMaster(theIPAsk.getText(), Integer.parseInt(thePortAsk.getText()), this);
+				blnConnected = ssm.connect();
+				if (blnConnected){
+					ssm.sendText ("connect, client, "+ theUserAsk.getText());
+				}
+			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
+				// Connect Server
+				ssm = new SuperSocketMaster(Integer.parseInt(thePortAsk.getText()), this);
+				blnConnected = ssm.connect();
+				if (blnConnected){
+					ssm.sendText ("connect, server, "+ theUserAsk.getText());
+				}
+			}
+			
+		}else if (evt.getSource() == ssm){
+			// If they get ssm text
+			System.out.println (ssm.readText());
+			
 		}
 		
 		
@@ -155,16 +197,24 @@ public class Connect4 implements ActionListener{
 		
 		// Set JComboBox
 		theThemesList = new JComboBox<>(strThemes);
-		theThemesList.setLocation (970,290);
+		theThemesList.setLocation (970,290+40);
 		theThemesList.setEditable (false);
 		theThemesList.addActionListener (this);
 		theThemesList.setVisible (true);
-		theThemesList.setSize (250,30);
-		//theThemesList.setAlignmentX (JComboBox.CENTER);
+		theThemesList.setSize (250,40);
+		Font theThemeChooseFont = new Font("Arial", Font.PLAIN, 20);
+        theThemesList.setFont(theThemeChooseFont);
 		theMainPanel.add (theThemesList);
 		
-		// Send the Theme information to all the other panels (REMEMBER TO ADD THIS WHEN COORDINATING)
-		//theMainPanel.
+		// Set the Connect Play Button
+		theConnectButton.setSize (600, 65);
+		theConnectButton.setLocation (160, 620);
+		theConnectButton.setHorizontalAlignment (JTextField.CENTER);
+		theMainPanel.add(theConnectButton);
+		theConnectButton.setEnabled (false);
+		theConnectButton.addActionListener (this);
+		theButtonFont = new Font ("Arial", Font.PLAIN, 50);
+		theConnectButton.setFont (theButtonFont);
 		
 		// Frame
 		theFrame.setContentPane(theMainPanel);
