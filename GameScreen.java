@@ -7,7 +7,10 @@ import java.awt.Font;
 
 import java.awt.image.*;
 import javax.imageio.*;
-
+/**
+ * <h1>Game Screen Backend</h1>
+ * Backend for the Game Screen<p>
+ */
 public class GameScreen implements ActionListener, KeyListener, MouseMotionListener, MouseListener{
 
 	//Properties
@@ -22,7 +25,9 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 		}
 	}
 	
-	
+/**
+   * Not in use<p>
+   */
 	public void mouseMoved(MouseEvent evt){
 		
 	}
@@ -56,28 +61,45 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	}
 	
 	
-	
+/**
+   * Not in use<p>
+   */	
 	public void keyReleased(KeyEvent evt){
 	
 	}
 	
-	
+/**
+   * Not in use<p>
+   */	
 	public void keyPressed(KeyEvent evt){
 	
 	}
-	
+/**
+   * Not in use<p>
+   */	
 	public void keyTyped(KeyEvent evt){
 	
 	}
 	
-	
+/**
+   * Not in use<p>
+   */	
 	public void mouseExited(MouseEvent evt){
 		
 	}
+/**
+   * Not in use<p>
+   */	
 	public void mouseEntered(MouseEvent evt){
 		
 	}
-	
+/**
+   * Dropping of Pieces<p>
+   * @param intP1X X-Coordinate of piece to be dropped
+   * @param intP1Y Y-Coordinate of piece to be dropped
+   * @param intColumn Column that piece is dropped in
+   * @param blnPersonDropped TBD
+   */	
 	public void mouseReleased(MouseEvent evt){
 		//Tile Drop Test and Variable Set
 		if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 && GSPanel.intP1X <= 240 + 22 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25){
@@ -103,18 +125,24 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 			GSPanel.blnPersonDropped = true;
 		}
 	}
-	
+/**
+   * Not in use<p>
+   */	
 	public void mousePressed(MouseEvent evt){
-	
-			
 		
 	}
-	
+/**
+   * Not in use<p>
+   */	
 	public void mouseClicked(MouseEvent evt){
 		
 	}
 	
 	//Constructor
+/**
+   * GameScreen<p>
+   * Layout setup
+   */		
 	public GameScreen(){
 		GSPanel.setPreferredSize(new Dimension(1280, 720));
 		GSPanel.addMouseMotionListener(this);

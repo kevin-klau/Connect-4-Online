@@ -6,6 +6,10 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+/**
+ * <h1>Connect 4 Frontend</h1>
+ * Images for the Main Screen<p>
+ */
 public class MainPanel extends JPanel{
 	// Properties
 	Font TitleFont;

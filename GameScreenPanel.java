@@ -9,7 +9,10 @@ import java.awt.image.*;
 import javax.imageio.*;
 
 import java.io.*;
-
+/**
+ * <h1>Game Screen Frontend</h1>
+ * GUI for the Game Screen<p>
+ */
 public class GameScreenPanel extends JPanel{
 
 

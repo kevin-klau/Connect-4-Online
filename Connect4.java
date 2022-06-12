@@ -41,6 +41,9 @@ public class Connect4 implements ActionListener{
 	JButton theReturnHomeButton = new JButton ("Return To Home");
 	
 	// Methods
+/**
+   * Invokes repaint everytime theTimer triggers ActionEvent<p>
+   */
 	public void actionPerformed (ActionEvent evt){
 		// Add the repaint function
 		if (evt.getSource() == theTimer){
@@ -102,6 +105,9 @@ public class Connect4 implements ActionListener{
 	}
 	
 	// Constructor
+/**
+   * Connect 4 GUI elements<p>
+   */
 	public Connect4 () {
 		// Main Panel
 		theMainPanel.setPreferredSize (new Dimension (1280,720));
