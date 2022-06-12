@@ -81,33 +81,26 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	public void mouseReleased(MouseEvent evt){
 		//Tile Drop Test and Variable Set
 		if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 && GSPanel.intP1X <= 240 + 22 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25){
-			//GSPanel.intP1Y = 550 ;
-			GSPanel.intStartDrop = 1;
-			/*
-			GSPanel.intDropped1 = GSPanel.intDropped1 -1;
-			GSPanel.strSlot[GSPanel.intDropped1][0].equalsIgnoreCase("filled");
-			
-			System.out.println(GSPanel.strSlot[GSPanel.intDropped1][0]);
-			System.out.println(GSPanel.intDropped1);
-			*/
+			GSPanel.intColumn = 0;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 + 65 && GSPanel.intP1X <= 240 + 22 + 65 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped2 = GSPanel.intDropped2 -1;
+			GSPanel.intColumn = 1;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 327 + 65 && GSPanel.intP1X <= 392 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped3 = GSPanel.intDropped3 -1;
+			GSPanel.intColumn = 2;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 392+65 && GSPanel.intP1X <= 457 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped4 = GSPanel.intDropped4 -1;
+			GSPanel.intColumn = 3;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 457 + 65 && GSPanel.intP1X <= 522 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped5 = GSPanel.intDropped5 -1;
+			GSPanel.intColumn = 4;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 522 + 65 && GSPanel.intP1X <= 587 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped6 = GSPanel.intDropped6 -1;
+			GSPanel.intColumn = 5;
+			GSPanel.blnPersonDropped = true;
 		}else if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 587 + 65 && GSPanel.intP1X <= 652 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
-			GSPanel.intP1Y = 550;
-			GSPanel.intDropped7 = GSPanel.intDropped7 -1;
+			GSPanel.intColumn = 6;
+			GSPanel.blnPersonDropped = true;
 		}
 	}
 	
