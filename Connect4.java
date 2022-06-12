@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * <h1>Connect 4</h1>
- * This class gives Java students the ability to quickly open a Java network socket<p>
+ * This is a program for Connect 4 game with LAN connectivity<p>
  * @author  Kevin Lau, Fergus Chu, Chris Ng
  * @version 1.0
  * @since   2022-06-12
