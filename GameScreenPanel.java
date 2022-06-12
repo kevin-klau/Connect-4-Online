@@ -43,6 +43,9 @@ public class GameScreenPanel extends JPanel{
 	
 	//Register Drop Variable
 	int intStartDrop = 0;
+	int intColumn;
+	
+	boolean blnPersonDropped = false;
 	
 	
 	//Methods
@@ -63,17 +66,23 @@ public class GameScreenPanel extends JPanel{
 		intP1Y = intP1Y  + intP1YMove;
 		
 		//Registering Drop
-		if(intStartDrop == 1){
-		
-					
-				intDropped1 = intDropped1 -1;
-				strSlot[intDropped1][0] = "filled";
-				intStartDrop = 0;
-				
-				System.out.println(strSlot[intDropped1][0]);
-				System.out.println(intDropped1);	
-				
+		// Check Which row to drop it in
+		if(blnPersonDropped == true){
+			for (intCount = 5; intCount >= 0; intCount--){
+				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
+                    strSlot[intCount][intColumn] = "filled";
+                    intCount = -1;
+                }
+            }
+            blnPersonDropped = false;
 		}
+
+            // draw the thing code
+            // CODE HERE
+            
+            // Send move over network
+				
+			
 		//Filling Slots
 		for(intCounter = 0; intCounter < 6; intCounter++){
 			for(intCount = 0; intCount < 7; intCount++){
