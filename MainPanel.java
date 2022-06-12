@@ -8,11 +8,13 @@ import java.awt.image.BufferedImage;
 
 public class MainPanel extends JPanel{
 	// Properties
-	BufferedImage Background;
-	BufferedImage P1Piece;
-	
 	Font TitleFont;
 	Font TextFont;
+	
+	BufferedImage Background;
+	BufferedImage P1Piece;
+	String strThemes = "Default";
+	Boolean blnImagesLoadOnce = false;
 	
 	// Methods
 	public void paintComponent (Graphics g){
@@ -44,17 +46,26 @@ public class MainPanel extends JPanel{
 		g.setColor (Color.BLACK);
 		g.fillRect (900, 280, 5, 350-30);
 		
+		// Add the Piece Prewview
+		g.drawImage (P1Piece, 995,330,this);
+		
+		// Load the images, if the theme changes, it'll change along as well
+		if (blnImagesLoadOnce == false){
+			try{
+				Background = ImageIO.read(new File("Themes/"+strThemes+"/BG.png"));
+				P1Piece = ImageIO.read (new File ("Themes/"+strThemes+"/P1.png"));
+			}catch(IOException e){
+				System.out.println("IMAGE UNABLE TO LOAD");
+			}
+			blnImagesLoadOnce = true;
+		}
+		
 	}
 	
 	// Constructor
 	public MainPanel(){
 		super();
 		
-		try{
-			Background = ImageIO.read(new File("Themes/Default/BG.png"));
-			P1Piece = ImageIO.read (new File ("Themes/Default/P1.png"));
-		}catch(IOException e){
-			System.out.println("IMAGE UNABLE TO LOAD");
-		}
+		
 	}
 }

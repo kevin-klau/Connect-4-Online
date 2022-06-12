@@ -11,6 +11,7 @@ public class Connect4 implements ActionListener{
 	// Properties
 	JFrame theFrame = new JFrame ("Connect 4");
 	MainPanel theMainPanel = new MainPanel ();
+	Timer theTimer = new Timer (1000/60, this);
 	
 	JTextField theIPAsk = new JTextField ();
 	JTextField thePortAsk = new JTextField ();
@@ -19,9 +20,26 @@ public class Connect4 implements ActionListener{
 	JButton theConnectServerButton = new JButton ("Create Server");
 	JButton theConnectClientButton = new JButton ("Connect as Client");
 	
+	JComboBox<String> theThemesList;
+	
+	String strTheme = "Default";
+	
 	// Methods
 	public void actionPerformed (ActionEvent evt){
-
+		// Add the repaint function
+		if (evt.getSource() == theTimer){
+			theMainPanel.repaint();
+		
+		
+		// If they use the JComboBox to change themes
+		}else if (evt.getSource() == theThemesList){
+			// Change it so the theme changes
+			theMainPanel.strThemes = (String)theThemesList.getSelectedItem();
+			theMainPanel.blnImagesLoadOnce = false;
+		}
+		
+		
+		
 		
 	}
 	
@@ -136,15 +154,17 @@ public class Connect4 implements ActionListener{
 		}
 		
 		// Set JComboBox
-		JComboBox<String> theThemesList = new JComboBox<>(strThemes);
-		theThemesList.setLocation (400,400);
+		theThemesList = new JComboBox<>(strThemes);
+		theThemesList.setLocation (970,290);
 		theThemesList.setEditable (false);
 		theThemesList.addActionListener (this);
 		theThemesList.setVisible (true);
-		theThemesList.setSize (400,400);
+		theThemesList.setSize (250,30);
+		//theThemesList.setAlignmentX (JComboBox.CENTER);
 		theMainPanel.add (theThemesList);
 		
-		
+		// Send the Theme information to all the other panels (REMEMBER TO ADD THIS WHEN COORDINATING)
+		//theMainPanel.
 		
 		// Frame
 		theFrame.setContentPane(theMainPanel);
@@ -154,6 +174,9 @@ public class Connect4 implements ActionListener{
         
 
         theFrame.pack();
+        
+        // Timer
+        theTimer.start();
 	}
 	
 	// Main Program
