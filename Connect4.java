@@ -21,6 +21,7 @@ public class Connect4 implements ActionListener{
 	JFrame theFrame = new JFrame ("Connect 4");
 	MainPanel theMainPanel = new MainPanel ();
 	Timer theTimer = new Timer (1000/60, this);
+	LoadPanel theLoadPanel = new LoadPanel ();
 	
 	// SuperSocketMaster
 	SuperSocketMaster ssm;
@@ -35,6 +36,9 @@ public class Connect4 implements ActionListener{
 	JButton theConnectButton = new JButton ("Play!!!");
 	String strTheme = "Default";
 	String strPersonConnect = "";
+	
+	// Load Panel Components
+	JButton theReturnHomeButton = new JButton ("Return To Home");
 	
 	// Methods
 	public void actionPerformed (ActionEvent evt){
@@ -71,6 +75,8 @@ public class Connect4 implements ActionListener{
 				blnConnected = ssm.connect();
 				if (blnConnected){
 					ssm.sendText ("connect, client, "+ theUserAsk.getText());
+					// Send to Load Screen
+					//theFrame.setContentPane(theLoadPanel);
 				}
 			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
 				// Connect Server
@@ -78,13 +84,16 @@ public class Connect4 implements ActionListener{
 				blnConnected = ssm.connect();
 				if (blnConnected){
 					ssm.sendText ("connect, server, "+ theUserAsk.getText());
+					// Send to Load Screen
+					theFrame.setContentPane(theLoadPanel);
+					System.out.println ("HELP ME");
 				}
 			}
+			
 			
 		}else if (evt.getSource() == ssm){
 			// If they get ssm text
 			System.out.println (ssm.readText());
-			
 		}
 		
 		
@@ -223,6 +232,13 @@ public class Connect4 implements ActionListener{
 		theButtonFont = new Font ("Arial", Font.PLAIN, 50);
 		theConnectButton.setFont (theButtonFont);
 		
+		// The Load Panel
+		theLoadPanel.setPreferredSize (new Dimension (1280,720));
+		theLoadPanel.setLayout(null);
+		
+		theLoadPanel.add (theReturnHomeButton);
+		
+		
 		// Frame
 		theFrame.setContentPane(theMainPanel);
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -234,6 +250,8 @@ public class Connect4 implements ActionListener{
         
         // Timer
         theTimer.start();
+        
+        
 	}
 	
 	// Main Program
