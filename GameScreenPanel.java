@@ -96,7 +96,7 @@ public class GameScreenPanel extends JPanel{
                     
                     //Drop animation attempt
                     //for(intP1DropY = 170; intP1DropY <= intP1DropYFinal; intP1DropY++){
-						g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY++ , null);
+					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY++ , null);
 						
 					//}
                 }
