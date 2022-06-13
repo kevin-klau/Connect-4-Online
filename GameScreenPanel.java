@@ -46,6 +46,19 @@ public class GameScreenPanel extends JPanel{
 	/** player 1 y-coordinate movement*/	
 	int intP1YMove;
 	
+	
+	
+	// Player 2 XY Properties
+	/** default piece x-coordinate*/
+	int intP2X = 106 + 358;
+	/** default piece y-coordinate*/
+	int intP2Y = 70 + 435 + 100;
+	
+	/** player 1 x-coordinate movement*/	
+	int intP2XMove;
+	/** player 1 y-coordinate movement*/	
+	int intP2YMove;
+	
 	// Tile Properties
 	//Array for Tile slots
 	/** tile array property*/	
@@ -55,9 +68,13 @@ public class GameScreenPanel extends JPanel{
 	/** array creation*/	
 	String strSlot[][] = new String [6][7];
 	
-	//Tile Drop Animation Variables
+	//Tile Drop Animation Variables P1
 	int intP1DropYFinal;
 	int intP1DropY = 170;
+	
+	//Tile Drop Animation Variables P2
+	int intP2DropYFinal;
+	int intP2DropY = 170;
 	
 	//Register Drop Variable
 	/** registed drop property*/
@@ -65,9 +82,16 @@ public class GameScreenPanel extends JPanel{
 	/** registed drop property*/
 	int intColumn;
 	/** allows for player to drop*/
-	boolean blnPersonDropped = false;
+	boolean blnPerson1Dropped = false;
 	/** indicates to the program when to do the animation*/
-	boolean blnDrawAnimation = true;
+	boolean blnDrawAnimationP1 = true;
+	/** allows for player to drop*/
+	boolean blnPerson2Dropped = false;
+	/** indicates to the program when to do the animation*/
+	boolean blnDrawAnimationP2 = true;
+	
+	//Turns
+	int intPlayer = 1;
 	
 	
 	//Methods
@@ -82,60 +106,176 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(BG, 0, 0, null);
 		g.drawImage(Board, 240, 70 + 100, null);
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
-		g.drawImage(P1, intP1X-25, intP1Y-25, null);		
+		g.drawImage(P1, intP1X-25, intP1Y-25, null);	
+		g.drawImage(P2, intP2X-25, intP2Y-25, null);		
 		
-		//Tile Move
-		intP1X = intP1X  + intP1XMove;
-		intP1Y = intP1Y  + intP1YMove;
-		
-		//Registering Drop
-		// Check Which row to drop it in
-		if(blnPersonDropped == true){
-			for (intCount = 5; intCount >= 0; intCount--){
-				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
-                    strSlot[intCount][intColumn] = "almost filled";
-                    intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
-                    intCount = -1;
-                }
-            }
-            blnPersonDropped = false;
-            blnDrawAnimation = true;
-            intP1DropY = 170;
-		}
-		
-		// Draw Animation
-		if (blnDrawAnimation == true){
-			if (intP1DropY <= intP1DropYFinal){
-				g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
-				g.drawImage(Board, 240, 70 + 100, null);
-				intP1DropY = intP1DropY + 10;
-			}else{
-				blnDrawAnimation = false;
-			}
-		}
-		
-		// Make the array filled
-		if (blnDrawAnimation == false){
-			for (intCount = 5; intCount >= 0; intCount--){
-				if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled")){
-					strSlot[intCount][intColumn] = "Filled";
-					intCount = -1;
-				}
-			}
-		}
-
-				
+		//P1
+		if(intPlayer == 1){
+			//Tile Move P1
+			intP1X = intP1X  + intP1XMove;
+			intP1Y = intP1Y  + intP1YMove;
 			
-		//Drawing the Filled Slots
-		for(intCounter = 0; intCounter < 6; intCounter++){
-			for(intCount = 0; intCount < 7; intCount++){
-				if(strSlot[intCounter][intCount].equalsIgnoreCase("filled")){
-					g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-						
+			//Registering Drop
+			// Check Which row to drop it in
+			if(blnPerson1Dropped == true){
+				for (intCount = 5; intCount >= 0; intCount--){
+					if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
+						strSlot[intCount][intColumn] = "almost filled P1";
+						intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
+						intCount = -1;
+					}
+				}
+				blnPerson1Dropped = false;
+				blnDrawAnimationP1 = true;
+				intP1DropY = 170;
+			}
+			
+			// Draw Animation
+			if (blnDrawAnimationP1 == true){
+				if (intP1DropY <= intP1DropYFinal){
+					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
+					g.drawImage(Board, 240, 70 + 100, null);
+					intP1DropY = intP1DropY + 10;
+				}else{
+					blnDrawAnimationP1 = false;
+				}
+			}
+			
+			// Make the array filled
+			if (blnDrawAnimationP1 == false){
+				for (intCount = 5; intCount >= 0; intCount--){
+					if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled P1")){
+						strSlot[intCount][intColumn] = "filled P1";
+						intCount = -1;
+						intPlayer = 2;
+					}
+				}
+			}
+
+					
+				
+			//Drawing the Filled Slots
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
+						g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+							
+					}if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
+						g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+							
+					}
+				}
+			}
+			
+			
+			//Winning If Statements
+			
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					//Statement so that array won't go out of bounds
+					if(intCount < 4){
+						//Statement so that you win if conditions met
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win horizontal");
+						}
+					}if(intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win Vertical");
+						}
+					}if(intCounter < 4 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win diagonal");
+						}	
+					}
+					
 				}
 			}
 		}
 		
+		
+		//P2
+		
+		if(intPlayer == 2){
+			//Tile Move P2
+			intP2X = intP2X  + intP2XMove;
+			intP2Y = intP2Y  + intP2YMove;
+			
+			//Registering Drop
+			// Check Which row to drop it in
+			if(blnPerson2Dropped == true){
+				for (intCount = 5; intCount >= 0; intCount--){
+					if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
+						strSlot[intCount][intColumn] = "almost filled P2";
+						intP2DropYFinal = intCount * (14 + 50) + 31 + 170;
+						intCount = -1;
+					}
+				}
+				blnPerson2Dropped = false;
+				blnDrawAnimationP2 = true;
+				intP2DropY = 170;
+			}
+			
+			// Draw Animation
+			if (blnDrawAnimationP2 == true){
+				if (intP2DropY <= intP2DropYFinal){
+					g.drawImage(P2, intColumn * (14 + 50) + 31 + 240 , intP2DropY, null);
+					g.drawImage(Board, 240, 70 + 100, null);
+					intP2DropY = intP2DropY + 10;
+				}else{
+					blnDrawAnimationP2 = false;
+				}
+			}
+			
+			// Make the array filled
+			if (blnDrawAnimationP2 == false){
+				for (intCount = 5; intCount >= 0; intCount--){
+					if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled P2")){
+						strSlot[intCount][intColumn] = "filled P2";
+						intCount = -1;
+						intPlayer = 1;
+					}
+				}
+			}
+
+					
+				
+			//Drawing the Filled Slots
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
+						g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+					}
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
+						g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+									
+					}
+				}
+			}
+			
+			
+			//Winning If Statements
+			
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					//Statement so that array won't go out of bounds
+					if(intCount < 4){
+						//Statement so that you win if conditions met
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P2") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P2") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P2") ){
+							System.out.println("You win horizontal");
+						}
+					}if(intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P2") ){
+							System.out.println("You win Vertical");
+						}
+					}if(intCounter < 4 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P2") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P2") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P2") ){
+							System.out.println("You win diagonal");
+						}	
+					}
+					
+				}
+			}
+		}
 		
 		//Images
 		if (blnImagesLoadOnce == false){
