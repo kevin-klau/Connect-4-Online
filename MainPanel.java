@@ -6,14 +6,26 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+/**
+ * <h1>Connect 4 Frontend</h1>
+ * Images for the Main Screen
+ */
 public class MainPanel extends JPanel{
 	// Properties
+	// Font Properties
+	/** font of title*/	
 	Font TitleFont;
+	/** font of text */	
 	Font TextFont;
-	
+	// Image Properties
+	/** background image */
 	BufferedImage Background;
+	/** player 1 piece image */
 	BufferedImage P1Piece;
+	// Theme Properties
+	/** theme selected, default by default */
 	String strThemes = "Default";
+	/** allowed theme change */	
 	Boolean blnImagesLoadOnce = false;
 	
 	// Methods
@@ -61,7 +73,9 @@ public class MainPanel extends JPanel{
 		}
 		
 	}
-	
+/**
+ * imports past (TBD)
+ */	
 	// Constructor
 	public MainPanel(){
 		super();

@@ -11,6 +11,7 @@ import java.net.*;
 /**
  * <h1>Connect 4</h1>
  * This is a program for Connect 4 game with LAN connectivity<p>
+ * You can open a server and a client to play over a network
  * @author  Kevin Lau, Fergus Chu, Chris Ng
  * @version 1.0
  * @since   2022-06-12
@@ -41,6 +42,9 @@ public class Connect4 implements ActionListener{
 	JButton theReturnHomeButton = new JButton ("Return To Home");
 	
 	// Methods
+/**
+   * <p>Invokes repaint everytime theTimer triggers ActionEvent/p>
+   */
 	public void actionPerformed (ActionEvent evt){
 		// Add the repaint function
 		if (evt.getSource() == theTimer){
@@ -103,6 +107,9 @@ public class Connect4 implements ActionListener{
 	}
 	
 	// Constructor
+/**
+   * <p>Connect 4 GUI elements</p>
+   */
 	public Connect4 () {
 		// Main Panel
 		theMainPanel.setPreferredSize (new Dimension (1280,720));
@@ -257,6 +264,10 @@ public class Connect4 implements ActionListener{
 	}
 	
 	// Main Program
+/**
+   * Main Program
+   * @param args TBD
+   */		
 	public static void main (String[]args){
 		new Connect4();
 	}
