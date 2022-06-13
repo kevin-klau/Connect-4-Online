@@ -14,7 +14,8 @@ public class LoadPanel extends JPanel{
 	public void paintComponent (Graphics g){
 		super.paintComponent(g);
 		
-		g.fillRect (0,0,2000,1000);
+		//g.set
+		//g.fillRect (0,0,2000,1000);
 	}
 	
 	// Constructor

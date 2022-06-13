@@ -45,6 +45,7 @@ public class Connect4 implements ActionListener{
 		// Add the repaint function
 		if (evt.getSource() == theTimer){
 			theMainPanel.repaint();
+			theLoadPanel.repaint();
 		
 		// If they use the JComboBox to change themes
 		}else if (evt.getSource() == theThemesList){
@@ -76,7 +77,7 @@ public class Connect4 implements ActionListener{
 				if (blnConnected){
 					ssm.sendText ("connect, client, "+ theUserAsk.getText());
 					// Send to Load Screen
-					//theFrame.setContentPane(theLoadPanel);
+					theFrame.setContentPane(theLoadPanel);
 				}
 			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
 				// Connect Server
@@ -240,7 +241,8 @@ public class Connect4 implements ActionListener{
 		
 		
 		// Frame
-		theFrame.setContentPane(theMainPanel);
+		// theFrame.setContentPane(theMainPanel);
+        theFrame.setContentPane(theMainPanel);
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setVisible(true);
         theFrame.setResizable(false);
