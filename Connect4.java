@@ -86,6 +86,9 @@ public class Connect4 implements ActionListener{
 					// Send to Load Screen
 					theFrame.setContentPane(theLoadPanel);
 					theFrame.pack();
+					
+					// Make the Player Counter 2 in the load screen
+					theLoadPanel.intNumberOfPlayersLoadedIn = 2;
 				}
 			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
 				// Connect Server
@@ -101,8 +104,33 @@ public class Connect4 implements ActionListener{
 			
 			
 		}else if (evt.getSource() == ssm){
-			// If they get ssm text
+			if ((ssm.readText()).substring (0,17).equalsIgnoreCase ("connect, client, ")){
+				// If the client connects to the server, make it show up in the loading screen
+				theLoadPanel.intNumberOfPlayersLoadedIn = 2;
+			} else if ((ssm.readText()).substring (0,18).equalsIgnoreCase ("disconnect, server")){
+				// If the server disconnects, disconnect and send everyone back to the home screen
+				System.out.println ("Sent back to home because server disonnected");
+				theFrame.setContentPane (theMainPanel);
+				theFrame.pack();
+				ssm.disconnect();
+				
+			} else if ((ssm.readText()).substring (0,18).equalsIgnoreCase ("disconnect, client")) {
+				// If the client disconnects, send the counter back to 1
+				System.out.println ("The client disconnected");
+				theLoadPanel.intNumberOfPlayersLoadedIn = 1;
+			} 
+			// If they get ssm text just print it out for now
 			System.out.println (ssm.readText());
+			
+		}else if (evt.getSource() == theReturnHomeButton){
+			// If they click the go back to home button in the loading screen, disconnect them and send them back home
+			theFrame.setContentPane (theMainPanel);
+			theConnectButton.setEnabled(false);
+			theFrame.pack();
+			
+			// Disconnect them from SSM
+			ssm.sendText ("disconnect, "+strPersonConnect+", "+theUserAsk.getText());
+			ssm.disconnect();
 		}
 		
 		
@@ -259,8 +287,7 @@ public class Connect4 implements ActionListener{
 		
 		
 		// Frame
-		//theFrame.setContentPane(theMainPanel);
-        theFrame.setContentPane(theLoadPanel);
+		theFrame.setContentPane(theMainPanel);
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setVisible(true);
         theFrame.setResizable(false);

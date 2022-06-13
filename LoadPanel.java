@@ -68,20 +68,18 @@ public class LoadPanel extends JPanel{
 		if (intBlinkCounter == 30){
 			intBlinkCounter = 0;
 			intBlinkCount++;
-			System.out.println ("+1 Blink: "+intBlinkCount);
 		}
 		
 		// Every time it reaches 3 pieces it resets
 		if (intBlinkCount == 4){
 			intBlinkCount = 0;
-			System.out.println ("Reset Blink");
 		}
 		
 		// Draw the Pieces
 		int intBlinker = intBlinkCount; 
 		while (intBlinker >= 0){
 			if (intBlinker < 3){
-				g.drawImage (P1Piece, 100+intBlinker*400, 250, this);
+				g.drawImage (P1Piece, 250+intBlinker*300, 300, this);
 				intBlinker--;
 			}else{
 				intBlinker = -1;
