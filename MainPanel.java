@@ -12,30 +12,17 @@ import java.awt.image.BufferedImage;
  */
 public class MainPanel extends JPanel{
 	// Properties
-/**
- * TitleFont TBD
- */	
+/** font of title*/	
 	Font TitleFont;
-/**
- * TextFont TBD
- */	
+/** font of text */	
 	Font TextFont;
-	
-/**
- * Background TBD
- */
+/** background image */
 	BufferedImage Background;
-/**
- * P1Piece TBD
- */
+/** player 1 piece image */
 	BufferedImage P1Piece;
-/**
- * strThemes TBD
- */
+/** theme selected, default by default */
 	String strThemes = "Default";
-/**
- * P1Piece TBD
- */	
+/** allowed theme change */	
 	Boolean blnImagesLoadOnce = false;
 	
 	// Methods
@@ -84,7 +71,7 @@ public class MainPanel extends JPanel{
 		
 	}
 /**
- * Background TBD
+ * imports past (TBD)
  */	
 	// Constructor
 	public MainPanel(){

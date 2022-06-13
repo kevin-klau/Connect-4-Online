@@ -17,37 +17,59 @@ public class GameScreenPanel extends JPanel{
 
 
 	//Properties
+	/** background image*/	
 	BufferedImage BG = null;
+	/** board image*/	
 	BufferedImage Board = null;
+	/** tray image*/	
 	BufferedImage Tray = null;
+	/** player 1 image*/	
 	BufferedImage P1 = null;
+	/** player 2 image*/	
 	BufferedImage P2 = null;
+	/** blank image*/	
 	BufferedImage Blank = null;
 	
+	/** default piece x-coordinate*/
 	int intP1X = 106 + 358;
+	/** default piece y-coordinate*/
 	int intP1Y = 70 + 435 + 100;
 	
+	/** player 1 x-coordinate movement*/	
 	int intP1XMove;
+	/** player 1 y-coordinate movement*/	
 	int intP1YMove;
 	
 	//Array for Tile slots
+	/** tile array property*/	
 	int intCount;
+	/** tile array property*/	
 	int intCounter;
+	/** array creation*/	
 	String strSlot[][] = new String [6][7];
 	
 	//Tile Dropped Variables
+	/** tile dropped property*/	
 	int intDropped1 = 6; 
+	/** tile dropped property*/	
 	int intDropped2 = 6; 
+	/** tile dropped property*/
 	int intDropped3 = 6; 
+	/** tile dropped property*/
 	int intDropped4 = 6; 
+	/** tile dropped property*/
 	int intDropped5 = 6; 
+	/** tile dropped property*/
 	int intDropped6 = 6; 
+	/** tile dropped property*/
 	int intDropped7 = 6; 
 	
 	//Register Drop Variable
+	/** registed drop property*/
 	int intStartDrop = 0;
+	/** registed drop property*/
 	int intColumn;
-	
+	/** allows for player to drop*/
 	boolean blnPersonDropped = false;
 	
 	
