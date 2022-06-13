@@ -12,17 +12,20 @@ import java.awt.image.BufferedImage;
  */
 public class MainPanel extends JPanel{
 	// Properties
-/** font of title*/	
+	// Font Properties
+	/** font of title*/	
 	Font TitleFont;
-/** font of text */	
+	/** font of text */	
 	Font TextFont;
-/** background image */
+	// Image Properties
+	/** background image */
 	BufferedImage Background;
-/** player 1 piece image */
+	/** player 1 piece image */
 	BufferedImage P1Piece;
-/** theme selected, default by default */
+	// Theme Properties
+	/** theme selected, default by default */
 	String strThemes = "Default";
-/** allowed theme change */	
+	/** allowed theme change */	
 	Boolean blnImagesLoadOnce = false;
 	
 	// Methods

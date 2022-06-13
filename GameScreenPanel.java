@@ -17,6 +17,7 @@ public class GameScreenPanel extends JPanel{
 
 
 	//Properties
+	// Image Properties
 	/** background image*/	
 	BufferedImage BG = null;
 	/** board image*/	
@@ -30,6 +31,7 @@ public class GameScreenPanel extends JPanel{
 	/** blank image*/	
 	BufferedImage Blank = null;
 	
+	// Player 1 XY Properties
 	/** default piece x-coordinate*/
 	int intP1X = 106 + 358;
 	/** default piece y-coordinate*/
@@ -40,6 +42,7 @@ public class GameScreenPanel extends JPanel{
 	/** player 1 y-coordinate movement*/	
 	int intP1YMove;
 	
+	// Tile Properties
 	//Array for Tile slots
 	/** tile array property*/	
 	int intCount;
