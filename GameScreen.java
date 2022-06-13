@@ -26,12 +26,14 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	}
 	
 /**
-   * Not in use<p>
-   */
+   * <p>Not in use</p>
+   */	
 	public void mouseMoved(MouseEvent evt){
 		
 	}
-	
+/**
+   * <p>Pickup of Pieces</p>
+   */		
 	public void mouseDragged(MouseEvent evt){
 		
 	/*
@@ -62,43 +64,39 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 	
 	
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void keyReleased(KeyEvent evt){
 	
 	}
 	
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void keyPressed(KeyEvent evt){
 	
 	}
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void keyTyped(KeyEvent evt){
 	
 	}
 	
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void mouseExited(MouseEvent evt){
 		
 	}
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void mouseEntered(MouseEvent evt){
 		
 	}
 /**
-   * Dropping of Pieces<p>
-   * @param intP1X X-Coordinate of piece to be dropped
-   * @param intP1Y Y-Coordinate of piece to be dropped
-   * @param intColumn Column that piece is dropped in
-   * @param blnPersonDropped TBD
+   * <p>Dropping of Pieces</p>
    */	
 	public void mouseReleased(MouseEvent evt){
 		//Tile Drop Test and Variable Set
@@ -126,13 +124,13 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 		}
 	}
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void mousePressed(MouseEvent evt){
 		
 	}
 /**
-   * Not in use<p>
+   * <p>Not in use</p>
    */	
 	public void mouseClicked(MouseEvent evt){
 		
@@ -159,6 +157,10 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 
 	}
 	//Main Method
+/**
+   * Main Program
+   * @param args TBD
+   */		
 	public static void main(String[] args){
 		new GameScreen();
 	}

@@ -11,7 +11,7 @@ import javax.imageio.*;
 import java.io.*;
 /**
  * <h1>Game Screen Frontend</h1>
- * GUI for the Game Screen<p>
+ * <p>GUI for the Game Screen</p>
  */
 public class GameScreenPanel extends JPanel{
 
@@ -52,6 +52,10 @@ public class GameScreenPanel extends JPanel{
 	
 	
 	//Methods
+/**
+   * <p>Paint Component
+   * Draws the images in the GUI</p>
+   */	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
@@ -102,6 +106,9 @@ public class GameScreenPanel extends JPanel{
 			
 	
 	}
+/**
+   * <p>Load Connect4 board as empty, Read Images</p>
+   */	
 	//Constructor
 	public GameScreenPanel(){
 		super();
