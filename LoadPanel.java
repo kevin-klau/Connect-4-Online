@@ -14,6 +14,11 @@ public class LoadPanel extends JPanel{
 	
 	
 	// Methods
+	/**
+   * generates images and shapes 
+   * 
+   * @param g painting tool
+   */		
 	public void paintComponent (Graphics g){
 		super.paintComponent(g);
 		
