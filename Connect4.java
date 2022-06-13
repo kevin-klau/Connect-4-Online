@@ -48,8 +48,11 @@ public class Connect4 implements ActionListener{
 	public void actionPerformed (ActionEvent evt){
 		// Add the repaint function
 		if (evt.getSource() == theTimer){
-			theMainPanel.repaint();
-			theLoadPanel.repaint();
+			if (theFrame.getContentPane() == theMainPanel){
+				theMainPanel.repaint();
+			}else if (theFrame.getContentPane() == theLoadPanel){
+				theLoadPanel.repaint();
+			}
 		
 		// If they use the JComboBox to change themes
 		}else if (evt.getSource() == theThemesList){
@@ -82,6 +85,7 @@ public class Connect4 implements ActionListener{
 					ssm.sendText ("connect, client, "+ theUserAsk.getText());
 					// Send to Load Screen
 					theFrame.setContentPane(theLoadPanel);
+					theFrame.pack();
 				}
 			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
 				// Connect Server
@@ -91,7 +95,7 @@ public class Connect4 implements ActionListener{
 					ssm.sendText ("connect, server, "+ theUserAsk.getText());
 					// Send to Load Screen
 					theFrame.setContentPane(theLoadPanel);
-					System.out.println ("HELP ME");
+					theFrame.pack();
 				}
 			}
 			
@@ -244,12 +248,19 @@ public class Connect4 implements ActionListener{
 		theLoadPanel.setPreferredSize (new Dimension (1280,720));
 		theLoadPanel.setLayout(null);
 		
+		// Create the Return Home Button
+		theReturnHomeButton.setSize (400, 60);
+		theReturnHomeButton.setLocation (440, 600);
+		theReturnHomeButton.setHorizontalAlignment (JTextField.CENTER);
+		theReturnHomeButton.addActionListener (this);
+		theButtonFont = new Font ("Arial", Font.PLAIN, 40);
+		theReturnHomeButton.setFont (theButtonFont);
 		theLoadPanel.add (theReturnHomeButton);
 		
 		
 		// Frame
-		// theFrame.setContentPane(theMainPanel);
-        theFrame.setContentPane(theMainPanel);
+		//theFrame.setContentPane(theMainPanel);
+        theFrame.setContentPane(theLoadPanel);
         theFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         theFrame.setVisible(true);
         theFrame.setResizable(false);
