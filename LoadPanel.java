@@ -91,7 +91,7 @@ public class LoadPanel extends JPanel{
 	
 	// Constructor
 /**
-   * LoadPanel Placeholder
+   *  imports past (TBD)
    */		
 	public LoadPanel(){
 		super();

@@ -51,21 +51,9 @@ public class GameScreenPanel extends JPanel{
 	/** array creation*/	
 	String strSlot[][] = new String [6][7];
 	
-	//Tile Dropped Variables
-	/** tile dropped property*/	
-	int intDropped1 = 6; 
-	/** tile dropped property*/	
-	int intDropped2 = 6; 
-	/** tile dropped property*/
-	int intDropped3 = 6; 
-	/** tile dropped property*/
-	int intDropped4 = 6; 
-	/** tile dropped property*/
-	int intDropped5 = 6; 
-	/** tile dropped property*/
-	int intDropped6 = 6; 
-	/** tile dropped property*/
-	int intDropped7 = 6; 
+	//Tile Drop Animation Variables
+	int intP1DropYFinal;
+	int intP1DropY = 170;
 	
 	//Register Drop Variable
 	/** registed drop property*/
@@ -104,6 +92,13 @@ public class GameScreenPanel extends JPanel{
 				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
                     strSlot[intCount][intColumn] = "filled";
                     intCount = -1;
+                    intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
+                    
+                    //Drop animation attempt
+                    //for(intP1DropY = 170; intP1DropY <= intP1DropYFinal; intP1DropY++){
+					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY++ , null);
+						
+					//}
                 }
             }
             blnPersonDropped = false;
@@ -116,6 +111,7 @@ public class GameScreenPanel extends JPanel{
 				
 			
 		//Filling Slots
+	
 		for(intCounter = 0; intCounter < 6; intCounter++){
 			for(intCount = 0; intCount < 7; intCount++){
 				if(strSlot[intCounter][intCount].equalsIgnoreCase("filled")){
@@ -124,6 +120,7 @@ public class GameScreenPanel extends JPanel{
 				}
 			}
 		}
+		
 		
 		
 		
