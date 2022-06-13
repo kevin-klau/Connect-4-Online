@@ -11,6 +11,7 @@ import java.net.*;
 /**
  * <h1>Connect 4</h1>
  * This is a program for Connect 4 game with LAN connectivity<p>
+ * You can open a server and a client to play over a network
  * @author  Kevin Lau, Fergus Chu, Chris Ng
  * @version 1.0
  * @since   2022-06-12

@@ -6,6 +6,9 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
+/**
+   * LoadPanel Placeholder
+   */		
 public class LoadPanel extends JPanel{
 	// Properties
 	
@@ -18,6 +21,9 @@ public class LoadPanel extends JPanel{
 	}
 	
 	// Constructor
+/**
+   * LoadPanel Placeholder
+   */		
 	public LoadPanel(){
 		super();
 		

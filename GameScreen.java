@@ -9,7 +9,7 @@ import java.awt.image.*;
 import javax.imageio.*;
 /**
  * <h1>Game Screen Backend</h1>
- * Backend for the Game Screen<p>
+ * Backend for the Game Screen
  */
 public class GameScreen implements ActionListener, KeyListener, MouseMotionListener, MouseListener{
 

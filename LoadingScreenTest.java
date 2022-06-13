@@ -3,8 +3,16 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+/**
+   * LoadingScreenTest 
+   */	
 public class LoadingScreenTest{
 	
+/**
+   * Main
+   * 
+   * @param args TBD
+   */		
 	// Main Method
 	public static void main(String[] args){
 		JFrame theFrame = new JFrame("Last GUI");

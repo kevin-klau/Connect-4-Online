@@ -144,7 +144,7 @@ public class SuperSocketMaster{
   }
   // Constructor
   /**
-   * Server Mode SuperSocketMaster Constructor<p>
+   * Server Mode SuperSocketMaster Constructor
    * 
    * @param intPort TCP Port you want to use for your connection
    * @param listener Swing/AWT program's ActionListener.  Usually "this"
@@ -154,7 +154,7 @@ public class SuperSocketMaster{
     this.intPort = intPort;
   }
   /**
-   * Client Mode SuperSocketMaster Constructor<p>
+   * Client Mode SuperSocketMaster Constructor
    * 
    * @param strServerIP Hostname or IP address of the server you want to connect to
    * @param intPort TCP Port you want to use for your connection

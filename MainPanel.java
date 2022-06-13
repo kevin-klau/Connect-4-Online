@@ -8,16 +8,34 @@ import java.awt.image.BufferedImage;
 
 /**
  * <h1>Connect 4 Frontend</h1>
- * Images for the Main Screen<p>
+ * Images for the Main Screen
  */
 public class MainPanel extends JPanel{
 	// Properties
+/**
+ * TitleFont TBD
+ */	
 	Font TitleFont;
+/**
+ * TextFont TBD
+ */	
 	Font TextFont;
 	
+/**
+ * Background TBD
+ */
 	BufferedImage Background;
+/**
+ * P1Piece TBD
+ */
 	BufferedImage P1Piece;
+/**
+ * strThemes TBD
+ */
 	String strThemes = "Default";
+/**
+ * P1Piece TBD
+ */	
 	Boolean blnImagesLoadOnce = false;
 	
 	// Methods
@@ -65,7 +83,9 @@ public class MainPanel extends JPanel{
 		}
 		
 	}
-	
+/**
+ * Background TBD
+ */	
 	// Constructor
 	public MainPanel(){
 		super();
