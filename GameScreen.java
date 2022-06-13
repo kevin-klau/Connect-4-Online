@@ -99,7 +99,6 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
    * <p>Dropping of Pieces</p>
    */	
 	public void mouseReleased(MouseEvent evt){
-		//Tile Drop Test and Variable Set
 		if(evt.getX() == GSPanel.intP1X  && GSPanel.intP1X >= 240 + 22 && GSPanel.intP1X <= 240 + 22 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25){
 			GSPanel.intColumn = 0;
 			GSPanel.blnPersonDropped = true;
