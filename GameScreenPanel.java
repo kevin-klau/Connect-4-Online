@@ -91,12 +91,14 @@ public class GameScreenPanel extends JPanel{
 			for (intCount = 5; intCount >= 0; intCount--){
 				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
                     strSlot[intCount][intColumn] = "filled";
+                    intCount = -1;
                     intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
+                    
                     //Drop animation attempt
-                    for(intP1DropY = 170; intP1DropY <= intP1DropYFinal; intP1DropY++){
-						g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY , null);
-						intCount = -1;
-					}
+                    //for(intP1DropY = 170; intP1DropY <= intP1DropYFinal; intP1DropY++){
+						g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY++ , null);
+						
+					//}
                 }
             }
             blnPersonDropped = false;
