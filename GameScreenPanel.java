@@ -30,6 +30,10 @@ public class GameScreenPanel extends JPanel{
 	BufferedImage P2 = null;
 	/** blank image*/	
 	BufferedImage Blank = null;
+	/** Boolean to indicate when to update images */
+	boolean blnImagesLoadOnce = false;
+	/** Theme indicator */
+	String strThemes = "Default";
 	
 	// Player 1 XY Properties
 	/** default piece x-coordinate*/
@@ -62,6 +66,8 @@ public class GameScreenPanel extends JPanel{
 	int intColumn;
 	/** allows for player to drop*/
 	boolean blnPersonDropped = false;
+	/** indicates to the program when to do the animation*/
+	boolean blnDrawAnimation = true;
 	
 	
 	//Methods
@@ -74,12 +80,9 @@ public class GameScreenPanel extends JPanel{
 		
 		//Asset Drawings
 		g.drawImage(BG, 0, 0, null);
-		
 		g.drawImage(Board, 240, 70 + 100, null);
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
-		
-		g.drawImage(P1, intP1X-25, intP1Y-25, null);
-		
+		g.drawImage(P1, intP1X-25, intP1Y-25, null);		
 		
 		//Tile Move
 		intP1X = intP1X  + intP1XMove;
@@ -90,28 +93,40 @@ public class GameScreenPanel extends JPanel{
 		if(blnPersonDropped == true){
 			for (intCount = 5; intCount >= 0; intCount--){
 				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
-                    strSlot[intCount][intColumn] = "filled";
-                    intCount = -1;
+                    strSlot[intCount][intColumn] = "almost filled";
                     intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
-                    
-                    //Drop animation attempt
-                    //for(intP1DropY = 170; intP1DropY <= intP1DropYFinal; intP1DropY++){
-					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY++ , null);
-						
-					//}
+                    intCount = -1;
                 }
             }
             blnPersonDropped = false;
+            blnDrawAnimation = true;
+            intP1DropY = 170;
+		}
+		
+		// Draw Animation
+		if (blnDrawAnimation == true){
+			if (intP1DropY <= intP1DropYFinal){
+				g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
+				g.drawImage(Board, 240, 70 + 100, null);
+				intP1DropY = intP1DropY + 10;
+			}else{
+				blnDrawAnimation = false;
+			}
+		}
+		
+		// Make the array filled
+		if (blnDrawAnimation == false){
+			for (intCount = 5; intCount >= 0; intCount--){
+				if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled")){
+					strSlot[intCount][intColumn] = "Filled";
+					intCount = -1;
+				}
+			}
 		}
 
-            // draw the thing code
-            // CODE HERE
-            
-            // Send move over network
 				
 			
-		//Filling Slots
-	
+		//Drawing the Filled Slots
 		for(intCounter = 0; intCounter < 6; intCounter++){
 			for(intCount = 0; intCount < 7; intCount++){
 				if(strSlot[intCounter][intCount].equalsIgnoreCase("filled")){
@@ -122,11 +137,21 @@ public class GameScreenPanel extends JPanel{
 		}
 		
 		
+		//Images
+		if (blnImagesLoadOnce == false){
+			try{
+				BG = ImageIO.read(new File ("Themes/"+strThemes+"/BG.png"));
+				Board = ImageIO.read(new File ("Themes/"+strThemes+"/Board.png"));
+				Tray = ImageIO.read(new File ("Themes/"+strThemes+"/Tray.png"));
+				P1 = ImageIO.read(new File ("Themes/"+strThemes+"/P1.png"));
+				P2 = ImageIO.read(new File ("Themes/"+strThemes+"/P2.png"));
+				Blank = ImageIO.read(new File ("Themes/"+strThemes+"/Blank.png"));
+			}catch(IOException e){
+				System.out.println("Invalid picture");
+			}
+			blnImagesLoadOnce = true;
+		}
 		
-		
-		
-			
-	
 	}
 /**
    * <p>Load Connect4 board as empty, Read Images</p>
@@ -141,44 +166,6 @@ public class GameScreenPanel extends JPanel{
 				strSlot[intCounter][intCount] = "empty";
 							
 			}
-		}
-		
-		
-		//Images
-		try{
-			BG = ImageIO.read(new File ("BG.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
-		}
-		
-		try{
-			Board = ImageIO.read(new File ("Board.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
-		}
-		
-		try{
-			Tray = ImageIO.read(new File ("Tray.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
-		}
-		
-		try{
-			P1 = ImageIO.read(new File ("P1.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
-		}
-		
-		try{
-			P2 = ImageIO.read(new File ("P2.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
-		}
-		
-		try{
-			Blank = ImageIO.read(new File ("Blank.png"));
-		}catch(IOException e){
-			System.out.println("Invalid picture");
 		}
 		
 	}

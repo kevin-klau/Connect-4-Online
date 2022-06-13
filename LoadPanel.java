@@ -54,7 +54,7 @@ public class LoadPanel extends JPanel{
 		if (blnImagesLoadOnce == false){
 			try{
 				Background = ImageIO.read(new File("Themes/"+strThemes+"/BG.png"));
-				P1Piece = ImageIO.read (new File ("Themes/"+strThemes+"/PreviewIcon.png"));
+				P1Piece = ImageIO.read (new File ("Themes/"+strThemes+"/LoadingIcon.png"));
 			}catch(IOException e){
 				System.out.println("IMAGE UNABLE TO LOAD");
 			}
