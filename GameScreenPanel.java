@@ -36,9 +36,9 @@ public class GameScreenPanel extends JPanel{
 	
 	// Player 1 XY Properties
 	/** default piece x-coordinate*/
-	int intP1X = 106 + 358;
+	int intP1X = 106 + 358 + 30;
 	/** default piece y-coordinate*/
-	int intP1Y = 70 + 435 + 100;
+	int intP1Y = 70 + 435 + 100 + 30;
 	
 	/** player 1 x-coordinate movement*/	
 	int intP1XMove;
@@ -49,9 +49,9 @@ public class GameScreenPanel extends JPanel{
 	
 	// Player 2 XY Properties
 	/** default piece x-coordinate*/
-	int intP2X = 106 + 358;
+	int intP2X = 106 + 358 + 30;
 	/** default piece y-coordinate*/
-	int intP2Y = 70 + 435 + 100;
+	int intP2Y = 70 + 435 + 100 + 30;
 	
 	/** player 1 x-coordinate movement*/	
 	int intP2XMove;
@@ -110,8 +110,28 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(BG, 0, 0, null);
 		g.drawImage(Board, 240, 70 + 100, null);
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
-		g.drawImage(P1, intP1X-25, intP1Y-25, null);	
-		g.drawImage(P2, intP2X-25, intP2Y-25, null);		
+		if(intPlayer == 1){
+			g.drawImage(P1, intP1X-25, intP1Y-25, null);	
+		}
+		if(intPlayer == 2){
+			g.drawImage(P2, intP2X-25, intP2Y-25, null);	
+		}	
+		
+		//Drawing Static Tiles on Tray
+		g.drawImage(P2, 494, 635, null);
+		g.drawImage(P1, 494, 615, null);
+		g.drawImage(P1, 469, 610, null);
+		g.drawImage(P2, 469, 610, null);
+		g.drawImage(P2, 520, 635, null);
+		g.drawImage(P1, 520, 615, null);
+		g.drawImage(P1, 440, 615, null);
+		g.drawImage(P2, 440, 635, null);
+		g.drawImage(P2, 410, 635, null);
+		g.drawImage(P2, 400, 635, null);
+		g.drawImage(P1, 410, 615, null);
+		g.drawImage(P1, 400, 615, null);
+		g.drawImage(P1, 540, 615, null);
+		g.drawImage(P2, 540, 635, null);
 		
 		//P1
 		if(intPlayer == 1){
