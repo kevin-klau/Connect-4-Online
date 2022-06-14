@@ -29,7 +29,6 @@ public class GameScreenPanel extends JPanel{
 	/** player 2 image*/	
 	BufferedImage P2 = null;
 	/** blank image*/	
-	BufferedImage Blank = null;
 	/** Boolean to indicate when to update images */
 	boolean blnImagesLoadOnce = false;
 	/** Theme indicator */
@@ -187,9 +186,13 @@ public class GameScreenPanel extends JPanel{
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
 							System.out.println("You win Vertical");
 						}
-					}if(intCounter < 4 && intCounter < 3){
+					}if(intCount < 4 && intCounter < 3){
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal");
+							System.out.println("You win diagonal left");
+						}	
+					}if(intCount > 4 && intCounter > 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter -1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter-2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter-3][intCount-3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win diagonal right");
 						}	
 					}
 					
@@ -272,9 +275,13 @@ public class GameScreenPanel extends JPanel{
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P2") ){
 							System.out.println("You win Vertical");
 						}
-					}if(intCounter < 4 && intCounter < 3){
+					}if(intCount < 4 && intCounter < 3){
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P2") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P2") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P2") ){
-							System.out.println("You win diagonal");
+							System.out.println("You win diagonal left");
+						}	
+					}if(intCount > 4 && intCounter > 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter -1][intCount-1].equalsIgnoreCase("filled P2") && strSlot[intCounter-2][intCount-2].equalsIgnoreCase("filled P2") && strSlot[intCounter-3][intCount-3].equalsIgnoreCase("filled P2") ){
+							System.out.println("You win diagonal right");
 						}	
 					}
 					
@@ -290,7 +297,6 @@ public class GameScreenPanel extends JPanel{
 				Tray = ImageIO.read(new File ("Themes/"+strThemes+"/Tray.png"));
 				P1 = ImageIO.read(new File ("Themes/"+strThemes+"/P1.png"));
 				P2 = ImageIO.read(new File ("Themes/"+strThemes+"/P2.png"));
-				Blank = ImageIO.read(new File ("Themes/"+strThemes+"/Blank.png"));
 			}catch(IOException e){
 				System.out.println("Invalid picture");
 			}
