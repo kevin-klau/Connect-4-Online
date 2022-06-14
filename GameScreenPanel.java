@@ -69,17 +69,21 @@ public class GameScreenPanel extends JPanel{
 	String strSlot[][] = new String [6][7];
 	
 	//Tile Drop Animation Variables P1
+	/** player 1 y-coordinate drop animation*/	
 	int intP1DropYFinal;
+	/** player 1 y-coordinate drop animation*/	
 	int intP1DropY = 170;
 	
 	//Tile Drop Animation Variables P2
+	/** player 2 y-coordinate drop animation*/	
 	int intP2DropYFinal;
+	/** player 2 y-coordinate drop animation*/	
 	int intP2DropY = 170;
 	
 	//Register Drop Variable
-	/** registed drop property*/
+	/** registered drop property*/
 	int intStartDrop = 0;
-	/** registed drop property*/
+	/** registered drop property*/
 	int intColumn;
 	/** allows for player to drop*/
 	boolean blnPerson1Dropped = false;
@@ -91,6 +95,7 @@ public class GameScreenPanel extends JPanel{
 	boolean blnDrawAnimationP2 = true;
 	
 	//Turns
+	/** player turn variable, starts at 1*/	
 	int intPlayer = 1;
 	
 	

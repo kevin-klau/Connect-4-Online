@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
    */		
 public class LoadPanel extends JPanel{
 	// Properties
+	/** numbers of players loaded in*/	
 	int intNumberOfPlayersLoadedIn = 1;
 	// Font Properties
 	/** font of title*/	
@@ -27,7 +28,9 @@ public class LoadPanel extends JPanel{
 	Boolean blnImagesLoadOnce = false;
 	
 	// Animation Properties
+	/** animation property*/	
 	int intBlinkCount = 0;
+	/**animation property*/	
 	int intBlinkCounter = 0;
 	
 	// Methods

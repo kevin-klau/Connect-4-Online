@@ -6,16 +6,27 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import javax.swing.event.*;
 
+/**
+ * <h1>First Help Screen</h1>
+ * <p>GUI for the First Help Screen</p>
+ */
 public class HelpScreen1 extends JPanel implements ActionListener{
 	//Properties
+	/** help screen background image*/	
 	BufferedImage helpBackground = null;
+	/** example board image*/	
 	BufferedImage help1 = null;
+	/** example board image*/	
 	BufferedImage help2 = null;
+	/** example board image*/	
 	BufferedImage help3 = null;
 	
+	/** first text area*/	
 	JTextArea helpText;
+	/** second text area*/	
 	JTextArea helpText2;
-	JButton backButton;
+	/** continues to next help page*/	
+	JButton continueButton;
 	
 	//Methods
 	public void actionPerformed(ActionEvent evt){
@@ -30,6 +41,7 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 		g.drawImage(help3, 600,400, this);
 	}
 	// Constructor	
+	/** constructor, load images, set state of JComponents*/	
 	public HelpScreen1(){
 		super();
 		try{
@@ -54,10 +66,10 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 		helpText2.setLocation(500, 100);
 		this.add(helpText2);
 		
-		backButton = new JButton();
-		backButton.setSize(new Dimension(200, 100));
-		backButton.setLocation(1000, 500);
-		backButton.setText("Continue!");
-		this.add(backButton);
+		continueButton = new JButton();
+		continueButton.setSize(new Dimension(200, 100));
+		continueButton.setLocation(1000, 500);
+		continueButton.setText("Continue!");
+		this.add(continueButton);
 	}
 }
