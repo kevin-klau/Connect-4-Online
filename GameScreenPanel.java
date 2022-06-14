@@ -183,7 +183,6 @@ public class GameScreenPanel extends JPanel{
 				for(intCount = 0; intCount < 7; intCount++){
 					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
 						g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-							
 					}if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
 						g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
 							
@@ -210,8 +209,8 @@ public class GameScreenPanel extends JPanel{
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
 							System.out.println("You win diagonal left");
 						}	
-					}if(intCount > 4 && intCounter > 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter -1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter-2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter-3][intCount-3].equalsIgnoreCase("filled P1") ){
+					}if(intCount < 4 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
 							System.out.println("You win diagonal right");
 						}	
 					}
@@ -299,8 +298,8 @@ public class GameScreenPanel extends JPanel{
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P2") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P2") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P2") ){
 							System.out.println("You win diagonal left");
 						}	
-					}if(intCount > 4 && intCounter > 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter -1][intCount-1].equalsIgnoreCase("filled P2") && strSlot[intCounter-2][intCount-2].equalsIgnoreCase("filled P2") && strSlot[intCounter-3][intCount-3].equalsIgnoreCase("filled P2") ){
+					}if(intCount < 4 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P2") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P2") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P2") ){
 							System.out.println("You win diagonal right");
 						}	
 					}
