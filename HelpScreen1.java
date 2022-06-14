@@ -13,7 +13,7 @@ import javax.swing.event.*;
 public class HelpScreen1 extends JPanel implements ActionListener{
 	//Properties
 	/** help screen background image*/	
-	BufferedImage helpBackground = null;
+	BufferedImage helpBG = null;
 	/** example board image*/	
 	BufferedImage help1 = null;
 	/** example board image*/	
@@ -36,6 +36,7 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		// Images
+		g.drawImage(helpBG, 0,0, null);
 		g.drawImage(help1, 200,400, this);
 		g.drawImage(help2, 400,400, this);
 		g.drawImage(help3, 600,400, this);
@@ -45,7 +46,7 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	public HelpScreen1(){
 		super();
 		try{
-			helpBackground = ImageIO.read(new File("HelpBG.png"));
+			helpBG = ImageIO.read(new File("HelpBG.png"));
 			help1 = ImageIO.read(new File("SampleBoardHelp1.png"));
 			help2 = ImageIO.read(new File("SampleBoardHelp2.png"));
 			help3 = ImageIO.read(new File("SampleBoardHelp3.png"));
