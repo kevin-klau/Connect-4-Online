@@ -23,6 +23,7 @@ public class Connect4 implements ActionListener{
 	MainPanel theMainPanel = new MainPanel ();
 	Timer theTimer = new Timer (1000/60, this);
 	LoadPanel theLoadPanel = new LoadPanel ();
+	GameScreenPanel GSPanel = new GameScreenPanel();
 	
 	// SuperSocketMaster
 	SuperSocketMaster ssm;
@@ -41,6 +42,11 @@ public class Connect4 implements ActionListener{
 	// Load Panel Components
 	JButton theReturnHomeButton = new JButton ("Return To Home");
 	
+	// GamePanel Components
+	JTextField theChatEnterField = new JTextField ();
+	JTextArea theChatBox = new JTextArea();
+	JScrollPane theScroll = new JScrollPane();
+	
 	// Methods
 /**
    * <p>Invokes repaint everytime theTimer triggers ActionEvent/p>
@@ -52,6 +58,8 @@ public class Connect4 implements ActionListener{
 				theMainPanel.repaint();
 			}else if (theFrame.getContentPane() == theLoadPanel){
 				theLoadPanel.repaint();
+			}else if (theFrame.getContentPane() == theLoadPanel){
+				GSPanel.repaint();
 			}
 		
 		// If they use the JComboBox to change themes
@@ -59,6 +67,12 @@ public class Connect4 implements ActionListener{
 			// Change it so the theme changes
 			theMainPanel.strThemes = (String)theThemesList.getSelectedItem();
 			theMainPanel.blnImagesLoadOnce = false;
+			
+			theLoadPanel.strThemes = (String)theThemesList.getSelectedItem();
+			theLoadPanel.blnImagesLoadOnce = false;
+			
+			GSPanel.strThemes = (String)theThemesList.getSelectedItem();
+			GSPanel.blnImagesLoadOnce = false;
 			
 		}else if (evt.getSource() == theConnectServerButton){
 			// Indicate whether or not they are connecting as a server or client
@@ -82,20 +96,24 @@ public class Connect4 implements ActionListener{
 				ssm = new SuperSocketMaster(theIPAsk.getText(), Integer.parseInt(thePortAsk.getText()), this);
 				blnConnected = ssm.connect();
 				if (blnConnected){
-					ssm.sendText ("connect, client, "+ theUserAsk.getText());
+					ssm.sendText ("connect,client,"+ theUserAsk.getText());
 					// Send to Load Screen
 					theFrame.setContentPane(theLoadPanel);
 					theFrame.pack();
 					
 					// Make the Player Counter 2 in the load screen
 					theLoadPanel.intNumberOfPlayersLoadedIn = 2;
+					
+					// Send to Game Screen
+					theFrame.setContentPane (GSPanel);
+					theFrame.pack();
 				}
 			}else if (strPersonConnect.equalsIgnoreCase ("Server")){
 				// Connect Server
 				ssm = new SuperSocketMaster(Integer.parseInt(thePortAsk.getText()), this);
 				blnConnected = ssm.connect();
 				if (blnConnected){
-					ssm.sendText ("connect, server, "+ theUserAsk.getText());
+					ssm.sendText ("connect,server,"+ theUserAsk.getText());
 					// Send to Load Screen
 					theFrame.setContentPane(theLoadPanel);
 					theFrame.pack();
@@ -104,21 +122,34 @@ public class Connect4 implements ActionListener{
 			
 			
 		}else if (evt.getSource() == ssm){
-			if ((ssm.readText()).substring (0,17).equalsIgnoreCase ("connect, client, ")){
+			// Make the code go into an array
+			String strSSMText[];
+			strSSMText = ssm.readText().split(",");
+			
+			if (strSSMText[0].equalsIgnoreCase ("connect") && strSSMText[1].equalsIgnoreCase ("client")){
 				// If the client connects to the server, make it show up in the loading screen
 				theLoadPanel.intNumberOfPlayersLoadedIn = 2;
-			} else if ((ssm.readText()).substring (0,18).equalsIgnoreCase ("disconnect, server")){
+				// Send to Game Screen
+				theFrame.setContentPane (GSPanel);
+				theFrame.pack();
+				
+			}else if (strSSMText[0].equalsIgnoreCase ("disconnect") && strSSMText[1].equalsIgnoreCase ("server")){
 				// If the server disconnects, disconnect and send everyone back to the home screen
 				System.out.println ("Sent back to home because server disonnected");
 				theFrame.setContentPane (theMainPanel);
 				theFrame.pack();
 				ssm.disconnect();
 				
-			} else if ((ssm.readText()).substring (0,18).equalsIgnoreCase ("disconnect, client")) {
+			}else if (strSSMText[0].equalsIgnoreCase ("disconnect") && strSSMText[1].equalsIgnoreCase ("client")){
 				// If the client disconnects, send the counter back to 1
 				System.out.println ("The client disconnected");
 				theLoadPanel.intNumberOfPlayersLoadedIn = 1;
-			} 
+				
+			}else if (strSSMText[0].equalsIgnoreCase ("chat")){
+				// If they receive the chat messages, add it to the chat box
+				theChatBox.append (strSSMText[1]+": "+strSSMText[2]+"\n");
+			}
+			
 			// If they get ssm text just print it out for now
 			System.out.println (ssm.readText());
 			
@@ -129,12 +160,16 @@ public class Connect4 implements ActionListener{
 			theFrame.pack();
 			
 			// Disconnect them from SSM
-			ssm.sendText ("disconnect, "+strPersonConnect+", "+theUserAsk.getText());
+			ssm.sendText ("disconnect,"+strPersonConnect+","+theUserAsk.getText());
 			ssm.disconnect();
+			
+		}else if (evt.getSource() == theChatEnterField){
+			// If they use the chat function, send it over to the network and add it in the chatbox
+			ssm.sendText ("chat,"+theUserAsk.getText()+","+theChatEnterField.getText()); 
+			theChatBox.append (theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			System.out.println (theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			
 		}
-		
-		
-		
 		
 	}
 	
@@ -284,6 +319,21 @@ public class Connect4 implements ActionListener{
 		theButtonFont = new Font ("Arial", Font.PLAIN, 40);
 		theReturnHomeButton.setFont (theButtonFont);
 		theLoadPanel.add (theReturnHomeButton);
+		
+		// Game Screen Panel
+		GSPanel.setPreferredSize (new Dimension (1280,720));
+		GSPanel.setLayout(null);
+		
+		// Make the JTextField where they enter text
+		theChatEnterField.setSize (300,25);
+		theChatEnterField.setLocation (1280-300,720-25);
+		theChatEnterField.addActionListener (this);
+		GSPanel.add(theChatEnterField);
+		
+		// Make the Chat Box
+		theScroll.setSize (300,720-25-100);
+		theScroll.setLocation (1280-300, 100);
+		GSPanel.add (theScroll);
 		
 		
 		// Frame

@@ -106,6 +106,20 @@ public class GameScreenPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
+		//Images
+		if (blnImagesLoadOnce == false){
+			try{
+				BG = ImageIO.read(new File ("Themes/"+strThemes+"/BG.png"));
+				Board = ImageIO.read(new File ("Themes/"+strThemes+"/Board.png"));
+				Tray = ImageIO.read(new File ("Themes/"+strThemes+"/Tray.png"));
+				P1 = ImageIO.read(new File ("Themes/"+strThemes+"/P1.png"));
+				P2 = ImageIO.read(new File ("Themes/"+strThemes+"/P2.png"));
+			}catch(IOException e){
+				System.out.println("Invalid picture");
+			}
+			blnImagesLoadOnce = true;
+		}
+		
 		//Asset Drawings
 		g.drawImage(BG, 0, 0, null);
 		g.drawImage(Board, 240, 70 + 100, null);
@@ -116,6 +130,15 @@ public class GameScreenPanel extends JPanel{
 		if(intPlayer == 2){
 			g.drawImage(P2, intP2X-25, intP2Y-25, null);	
 		}	
+		
+		// Add the Chat Text Thing
+		g.setColor (new Color (240,240,240));
+		g.fillRect (1280-300,0,300,100);
+		g.setColor (Color.BLACK);
+		g.drawRect (1280-300,0,299,100);
+		Font newFont = new Font ("Calibri", Font.PLAIN, 90);
+		g.setFont (newFont);
+		g.drawString ("Chat:", 1280-250,80);
 		
 		//Drawing Static Tiles on Tray
 		g.drawImage(P2, 494, 635, null);
@@ -306,20 +329,6 @@ public class GameScreenPanel extends JPanel{
 					
 				}
 			}
-		}
-		
-		//Images
-		if (blnImagesLoadOnce == false){
-			try{
-				BG = ImageIO.read(new File ("Themes/"+strThemes+"/BG.png"));
-				Board = ImageIO.read(new File ("Themes/"+strThemes+"/Board.png"));
-				Tray = ImageIO.read(new File ("Themes/"+strThemes+"/Tray.png"));
-				P1 = ImageIO.read(new File ("Themes/"+strThemes+"/P1.png"));
-				P2 = ImageIO.read(new File ("Themes/"+strThemes+"/P2.png"));
-			}catch(IOException e){
-				System.out.println("Invalid picture");
-			}
-			blnImagesLoadOnce = true;
 		}
 		
 	}
