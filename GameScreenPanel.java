@@ -85,13 +85,22 @@ public class GameScreenPanel extends JPanel{
 	/** registered drop property*/
 	int intColumn;
 	/** allows for player to drop*/
-	boolean blnPerson1Dropped = false;
+	boolean blnPersonDropped = false;
 	/** indicates to the program when to do the animation*/
 	boolean blnDrawAnimationP1 = true;
 	/** allows for player to drop*/
 	boolean blnPerson2Dropped = false;
 	/** indicates to the program when to do the animation*/
 	boolean blnDrawAnimationP2 = true;
+	/** indicates when the player releases a piece*/
+	boolean blnPlayerReleasedMouse = false;
+	/** indicates when it is the player turn*/
+	boolean blnPlayerTurn = true;
+	/** indicates when to send the server message*/
+	boolean blnSendInfo = false;
+	
+	
+	int intInfoColumn;
 	
 	//Turns
 	/** player turn variable, starts at 1*/	
@@ -105,6 +114,32 @@ public class GameScreenPanel extends JPanel{
    */	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		
+		if (blnPlayerReleasedMouse == true){
+			// Calculate which column it is dropped in
+			if(intP1X >= 240 + 22 && intP1X <= 240 + 22 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25){
+				intColumn = 0;
+			}else if(intP1X >= 240 + 22 + 65 &&intP1X <= 240 + 22 + 65 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 1;
+			}else if(intP1X >= 327 + 65 && intP1X <= 392 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 2;
+			}else if(intP1X >= 392+65 && intP1X <= 457 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 3;
+			}else if(intP1X >= 457 + 65 && intP1X <= 522 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 4;
+			}else if(intP1X >= 522 + 65 && intP1X <= 587 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 5;
+			}else if(intP1X >= 587 + 65 && intP1X <= 652 + 65 && intP1Y >= 170 - 25 && intP1Y <= 170 + 25 ){
+				intColumn = 6;
+			}
+			
+			blnPersonDropped = true;
+			//Repositioning tile after use
+			intP1X = 106 + 358 + 30;
+			intP1Y = 70 + 435 + 100 + 30;
+			
+			blnPlayerReleasedMouse = false;
+		}
 		
 		//Images
 		if (blnImagesLoadOnce == false){
@@ -127,15 +162,13 @@ public class GameScreenPanel extends JPanel{
 		if(intPlayer == 1){
 			g.drawImage(P1, intP1X-25, intP1Y-25, null);	
 		}
-		if(intPlayer == 2){
-			g.drawImage(P2, intP2X-25, intP2Y-25, null);	
-		}	
 		
 		// Add the Chat Text Thing
 		g.setColor (new Color (240,240,240));
 		g.fillRect (1280-300,0,300,100);
 		g.setColor (Color.BLACK);
 		g.drawRect (1280-300,0,299,100);
+		g.fillRect (100,20,780,130);
 		Font newFont = new Font ("Calibri", Font.PLAIN, 90);
 		g.setFont (newFont);
 		g.drawString ("Chat:", 1280-250,80);
@@ -156,29 +189,23 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(P1, 540, 615, null);
 		g.drawImage(P2, 540, 635, null);
 		
-		//P1
-		if(intPlayer == 1){
-			//Tile Move P1
-			intP1X = intP1X  + intP1XMove;
-			intP1Y = intP1Y  + intP1YMove;
-			
-			//Registering Drop
-			// Check Which row to drop it in
-			if(blnPerson1Dropped == true){
-				for (intCount = 5; intCount >= 0; intCount--){
-					if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
-						strSlot[intCount][intColumn] = "almost filled P1";
-						intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
-						intCount = -1;
-					}
+		// Calculate which row to drop it in
+		if(blnPersonDropped == true){
+			for (intCount = 5; intCount >= 0; intCount--){
+				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
+					strSlot[intCount][intColumn] = "almost filled";
+					intP1DropYFinal = intCount * (14 + 50) + 31 + 170;
+					intCount = -1;
 				}
-				blnPerson1Dropped = false;
-				blnDrawAnimationP1 = true;
-				intP1DropY = 170;
 			}
-			
-			// Draw Animation
-			if (blnDrawAnimationP1 == true){
+			blnPersonDropped = false;
+			blnDrawAnimationP1 = true;
+			intP1DropY = 170;
+		}
+		
+		// Draw Animation
+		if (blnDrawAnimationP1 == true){
+			if (blnPlayerTurn == true){
 				if (intP1DropY <= intP1DropYFinal){
 					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
 					g.drawImage(Board, 240, 70 + 100, null);
@@ -186,66 +213,78 @@ public class GameScreenPanel extends JPanel{
 				}else{
 					blnDrawAnimationP1 = false;
 				}
-			}
-			
-			// Make the array filled
-			if (blnDrawAnimationP1 == false){
-				for (intCount = 5; intCount >= 0; intCount--){
-					if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled P1")){
-						strSlot[intCount][intColumn] = "filled P1";
-						intCount = -1;
-						intPlayer = 2;
-					}
-				}
-			}
-
-					
-				
-			//Drawing the Filled Slots
-			for(intCounter = 0; intCounter < 6; intCounter++){
-				for(intCount = 0; intCount < 7; intCount++){
-					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
-						g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-					}if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
-						g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-							
-					}
-				}
-			}
-			
-			
-			//Winning If Statements
-			
-			for(intCounter = 0; intCounter < 6; intCounter++){
-				for(intCount = 0; intCount < 7; intCount++){
-					//Statement so that array won't go out of bounds
-					if(intCount < 4){
-						//Statement so that you win if conditions met
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win horizontal");
-						}
-					}if(intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win Vertical");
-						}
-					}if(intCount < 4 && intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal left");
-						}	
-					}if(intCount > 2 && intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal right");
-						}	
-					}
-					
+			}else if (blnPlayerTurn == false){
+				if (intP1DropY <= intP1DropYFinal){
+					g.drawImage(P2, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
+					g.drawImage(Board, 240, 70 + 100, null);
+					intP1DropY = intP1DropY + 10;
+				}else{
+					blnDrawAnimationP1 = false;
 				}
 			}
 		}
 		
+		// Make the array filled
+		if (blnDrawAnimationP1 == false){
+			for (intCount = 5; intCount >= 0; intCount--){
+				if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled")){
+					if (blnPlayerTurn == true){
+						strSlot[intCount][intColumn] = "filled P1";
+					}else if (blnPlayerTurn == false){
+						strSlot[intCount][intColumn] = "filled P2";
+					}
+					intCount = -1;
+					
+					// Change Turns
+					if (blnPlayerTurn == true){
+						blnPlayerTurn = false;
+						System.out.println ("Switched to false");
+						// Send message to server
+						blnSendInfo = true;
+						intInfoColumn = intColumn;
+					}else if (blnPlayerTurn == false){
+						blnPlayerTurn = true;
+					}
+				}
+			}
+		}
 		
+		// Drawing the Pieces on the board
+		for(intCounter = 0; intCounter < 6; intCounter++){
+			for(intCount = 0; intCount < 7; intCount++){
+				if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
+					g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+				}if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
+					g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
+						
+				}
+			}
+		}
 		
-		
-		
+		//Winning If Statements
+		for(intCounter = 0; intCounter < 6; intCounter++){
+			for(intCount = 0; intCount < 7; intCount++){
+				//Statement so that array won't go out of bounds
+				if(intCount < 4){
+					//Statement so that you win if conditions met
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
+						System.out.println("You win horizontal");
+					}
+				}if(intCounter < 3){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
+						System.out.println("You win Vertical");
+					}
+				}if(intCount < 4 && intCounter < 3){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
+						System.out.println("You win diagonal left");
+					}	
+				}if(intCount > 2 && intCounter < 3){
+					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
+						System.out.println("You win diagonal right");
+					}	
+				}
+			}
+		}		
 	}
 /**
    * <p>Load Connect4 board as empty, Read Images</p>
