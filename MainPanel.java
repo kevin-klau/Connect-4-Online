@@ -59,7 +59,7 @@ public class MainPanel extends JPanel{
 		g.fillRect (900, 280, 5, 350-30);
 		
 		// Add the Piece Prewview
-		g.drawImage (P1Piece, 955,350+40,this);
+		g.drawImage (P1Piece, 955,350+40-50,this);
 		
 		// Load the images, if the theme changes, it'll change along as well
 		if (blnImagesLoadOnce == false){

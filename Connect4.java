@@ -24,6 +24,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	Timer theTimer = new Timer (1000/60, this);
 	LoadPanel theLoadPanel = new LoadPanel ();
 	GameScreenPanel GSPanel = new GameScreenPanel();
+	HelpScreen1 theHelpScreen1 = new HelpScreen1();
 	
 	// SuperSocketMaster
 	SuperSocketMaster ssm;
@@ -38,6 +39,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	JButton theConnectButton = new JButton ("Play!!!");
 	String strTheme = "Default";
 	String strPersonConnect = "";
+	JButton theSendHelpButton = new JButton ("Click here for help!");
 	
 	// Load Panel Components
 	JButton theReturnHomeButton = new JButton ("Return To Home");
@@ -47,6 +49,8 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	JTextArea theChatBox = new JTextArea();
 	JScrollPane theScroll = new JScrollPane(theChatBox);
 	JLabel theTurnLabel = new JLabel();
+	JButton thePlayAgainButton = new JButton("Play Again!");
+	JButton theGoBackHomeButton = new JButton("Main Menu!");
 	
 	// Methods
 /**
@@ -73,6 +77,14 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				if (GSPanel.blnSendInfo == true){
 					ssm.sendText ("game,drop,"+GSPanel.intInfoColumn);
 					GSPanel.blnSendInfo = false;
+				}
+				
+				// End the Game when 1 player wins
+				if (GSPanel.blnGameDone == true){
+					ssm.sendText ("game,winner,"+theUserAsk.getText());
+					GSPanel.add (thePlayAgainButton);
+					GSPanel.add (theGoBackHomeButton);
+					GSPanel.blnGameDone = false;
 				}
 			}
 		
@@ -198,6 +210,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			theChatBox.append (" "+theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
 			theChatEnterField.setText ("");
 			
+		}else if (evt.getSource() == theSendHelpButton){
+			// They click the help button, send them to the help menu
+			theFrame.setContentPane(theHelpScreen1);
+			theFrame.pack();
+			
 		}
 		
 	}
@@ -212,7 +229,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    * <p>Pickup of Pieces</p>
    */		
 	public void mouseDragged(MouseEvent evt){
-		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true){	
+		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){	
 			if(GSPanel.intPlayer == 1){
 				//Moving tile Player
 				GSPanel.intP1X = evt.getX();
@@ -260,10 +277,13 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	public void mouseReleased(MouseEvent evt){
 		if (theFrame.getContentPane() == GSPanel){
 			//Player drop
-			if(GSPanel.blnPlayerTurn == true){
+			if(GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false && evt.getX() > 260 && evt.getX()<720 && evt.getY() > 140 && evt.getY() < 200){
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
 				GSPanel.blnPlayerReleasedMouse = true;
+			}else{
+				GSPanel.intP1X = -1000;
+				GSPanel.intP1Y = -1000;
 			}
 		}
 	}
@@ -395,7 +415,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		
 		// Set JComboBox
 		theThemesList = new JComboBox<>(strThemes);
-		theThemesList.setLocation (970,290+40);
+		theThemesList.setLocation (970,290+40-50);
 		theThemesList.setEditable (false);
 		theThemesList.addActionListener (this);
 		theThemesList.setVisible (true);
@@ -413,6 +433,15 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		theConnectButton.addActionListener (this);
 		theButtonFont = new Font ("Arial", Font.PLAIN, 50);
 		theConnectButton.setFont (theButtonFont);
+		
+		// Add the Help Menu Button
+		theSendHelpButton.setSize (250,40);
+		theSendHelpButton.setLocation (970,650);
+		theSendHelpButton.setHorizontalAlignment (JTextField.CENTER);
+		theSendHelpButton.addActionListener (this);
+		Font theFont = new Font("Arial", Font.PLAIN, 25);
+        theSendHelpButton.setFont(theFont);
+        theMainPanel.add (theSendHelpButton);
 		
 		// The Load Panel
 		theLoadPanel.setPreferredSize (new Dimension (1280,720));
@@ -451,6 +480,10 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		Font newFont = new Font ("Calibri", Font.PLAIN, 100);
 		theTurnLabel.setFont (newFont);
 		GSPanel.add (theTurnLabel);
+		
+		// The Help Menu 1
+		theHelpScreen1.setPreferredSize (new Dimension (1280,720));
+		theHelpScreen1.setLayout (null);
 		
 		
 		// Frame
