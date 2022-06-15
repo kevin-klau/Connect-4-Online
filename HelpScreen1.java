@@ -31,10 +31,12 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	JButton continueButton;
 	
 	//Methods
+	/** not in use*/
 	public void actionPerformed(ActionEvent evt){
 		
 	}
 	
+	/** paints images on the GUI*/
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		// Images
