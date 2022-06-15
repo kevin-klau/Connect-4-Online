@@ -16,7 +16,7 @@ import java.net.*;
  * @version 1.0
  * @since   2022-06-12
  */
-public class Connect4 implements ActionListener{
+public class Connect4 implements ActionListener, KeyListener, MouseMotionListener, MouseListener{
 	// Properties
 	// Main JCompoennts
 	JFrame theFrame = new JFrame ("Connect 4");
@@ -58,7 +58,7 @@ public class Connect4 implements ActionListener{
 				theMainPanel.repaint();
 			}else if (theFrame.getContentPane() == theLoadPanel){
 				theLoadPanel.repaint();
-			}else if (theFrame.getContentPane() == theLoadPanel){
+			}else if (theFrame.getContentPane() == GSPanel){
 				GSPanel.repaint();
 			}
 		
@@ -174,6 +174,121 @@ public class Connect4 implements ActionListener{
 			theChatEnterField.setText ("");
 			
 		}
+		
+	}
+	
+	/**
+   * <p>Not in use</p>
+   */	
+	public void mouseMoved(MouseEvent evt){
+		
+	}
+/**
+   * <p>Pickup of Pieces</p>
+   */		
+	public void mouseDragged(MouseEvent evt){
+		if (theFrame.getContentPane() == GSPanel){	
+			if(GSPanel.intPlayer == 1){
+				//Moving tile Player
+				GSPanel.intP1X = evt.getX();
+				GSPanel.intP1Y = evt.getY();
+			}
+		}
+	}
+	
+	
+/**
+   * <p>Not in use</p>
+   */	
+	public void keyReleased(KeyEvent evt){
+	
+	}
+	
+/**
+   * <p>Not in use</p>
+   */	
+	public void keyPressed(KeyEvent evt){
+	
+	}
+/**
+   * <p>Not in use</p>
+   */	
+	public void keyTyped(KeyEvent evt){
+	
+	}
+	
+/**
+   * <p>Not in use</p>
+   */	
+	public void mouseExited(MouseEvent evt){
+		
+	}
+/**
+   * <p>Not in use</p>
+   */	
+	public void mouseEntered(MouseEvent evt){
+		
+	}
+/**
+   * <p>Dropping of Pieces</p>
+   */	
+	public void mouseReleased(MouseEvent evt){
+		if (theFrame.getContentPane() == GSPanel){
+			//Player drop
+			if(GSPanel.intPlayer == 1){
+				GSPanel.intP1X = evt.getX();
+				if(GSPanel.intP1X >= 240 + 22 && GSPanel.intP1X <= 240 + 22 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25){
+					GSPanel.intColumn = 0;
+					GSPanel.blnPerson1Dropped = true;
+					//Repositioning tile after use
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 240 + 22 + 65 && GSPanel.intP1X <= 240 + 22 + 65 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 1;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 327 + 65 && GSPanel.intP1X <= 392 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 2;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 392+65 && GSPanel.intP1X <= 457 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 3;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 457 + 65 && GSPanel.intP1X <= 522 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 4;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 522 + 65 && GSPanel.intP1X <= 587 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 5;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}else if(GSPanel.intP1X >= 587 + 65 && GSPanel.intP1X <= 652 + 65 && evt.getY() == GSPanel.intP1Y && GSPanel.intP1Y >= 170 - 25 && GSPanel.intP1Y <= 170 + 25 ){
+					GSPanel.intColumn = 6;
+					GSPanel.blnPerson1Dropped = true;
+					GSPanel.intP1X = 106 + 358 + 30;
+					GSPanel.intP1Y = 70 + 435 + 100 + 30;
+				}
+			}
+		}
+		
+		
+	}
+/**
+   * <p>Not in use</p>
+   */	
+	public void mousePressed(MouseEvent evt){
+		
+	}
+/**
+   * <p>Not in use</p>
+   */	
+	public void mouseClicked(MouseEvent evt){
 		
 	}
 	
@@ -327,6 +442,8 @@ public class Connect4 implements ActionListener{
 		// Game Screen Panel
 		GSPanel.setPreferredSize (new Dimension (1280,720));
 		GSPanel.setLayout(null);
+		GSPanel.addMouseMotionListener(this);
+		GSPanel.addMouseListener(this);
 		
 		// Make the JTextField where they enter text
 		theChatEnterField.setSize (300,25);
