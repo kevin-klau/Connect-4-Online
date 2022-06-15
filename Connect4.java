@@ -45,7 +45,7 @@ public class Connect4 implements ActionListener{
 	// GamePanel Components
 	JTextField theChatEnterField = new JTextField ();
 	JTextArea theChatBox = new JTextArea();
-	JScrollPane theScroll = new JScrollPane();
+	JScrollPane theScroll = new JScrollPane(theChatBox);
 	
 	// Methods
 /**
@@ -125,6 +125,10 @@ public class Connect4 implements ActionListener{
 			// Make the code go into an array
 			String strSSMText[];
 			strSSMText = ssm.readText().split(",");
+			// connect, kevin, win
+			//strSSMText[0] = connect;
+			//strSSMText[1]= kevin;
+			//strSSMText[2] = win;
 			
 			if (strSSMText[0].equalsIgnoreCase ("connect") && strSSMText[1].equalsIgnoreCase ("client")){
 				// If the client connects to the server, make it show up in the loading screen
@@ -147,7 +151,7 @@ public class Connect4 implements ActionListener{
 				
 			}else if (strSSMText[0].equalsIgnoreCase ("chat")){
 				// If they receive the chat messages, add it to the chat box
-				theChatBox.append (strSSMText[1]+": "+strSSMText[2]+"\n");
+				theChatBox.append (" "+strSSMText[1]+": "+strSSMText[2]+"\n");
 			}
 			
 			// If they get ssm text just print it out for now
@@ -166,8 +170,8 @@ public class Connect4 implements ActionListener{
 		}else if (evt.getSource() == theChatEnterField){
 			// If they use the chat function, send it over to the network and add it in the chatbox
 			ssm.sendText ("chat,"+theUserAsk.getText()+","+theChatEnterField.getText()); 
-			theChatBox.append (theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
-			System.out.println (theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			theChatBox.append (" "+theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			theChatEnterField.setText ("");
 			
 		}
 		
