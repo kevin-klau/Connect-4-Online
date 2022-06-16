@@ -49,10 +49,10 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	public HelpScreen1(){
 		super();
 		try{
-			helpBG = ImageIO.read(new File("HelpBG.png"));
-			help1 = ImageIO.read(new File("SampleHelpBoard1.png"));
-			help2 = ImageIO.read(new File("SampleHelpBoard2.png"));
-			help3 = ImageIO.read(new File("SampleHelpBoard3.png"));
+			helpBG = ImageIO.read(new File("HelpImage/HelpBG.png"));
+			help1 = ImageIO.read(new File("HelpImage/SampleHelpBoard1.png"));
+			help2 = ImageIO.read(new File("HelpImage/SampleHelpBoard2.png"));
+			help3 = ImageIO.read(new File("HelpImage/SampleHelpBoard3.png"));
 		}catch(IOException e){
 			System.out.println("Image Error");
 		}
