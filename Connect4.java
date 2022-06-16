@@ -60,6 +60,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	
 	//Mouse Pressed Activation
 	int intMouseActive = 0;
+	int intDemoMouseActive = 0;
 	
 	// Methods
 /**
@@ -337,8 +338,10 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			}			
 		}else if (theFrame.getContentPane() == theHelpScreen2){
 			// Demo Screen code
-			theHelpScreen2.intP1X = evt.getX();
-			theHelpScreen2.intP1Y = evt.getY();
+			if(intDemoMouseActive == 1){
+				theHelpScreen2.intP1X = evt.getX();
+				theHelpScreen2.intP1Y = evt.getY();
+			}
 			
 		}
 	}
@@ -398,9 +401,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				theHelpScreen2.intP1X = evt.getX();
 				theHelpScreen2.intP1Y = evt.getY();
 				theHelpScreen2.blnPlayerReleasedMouse = true;
+				intDemoMouseActive = 0;
 			}else{
 				theHelpScreen2.intP1X = -1000;
 				theHelpScreen2.intP1Y = -1000;
+				intDemoMouseActive = 0;
 			}
 		}
 	}
@@ -408,8 +413,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    * <p>Not in use</p>
    */	
 	public void mousePressed(MouseEvent evt){
-		if(evt.getY() > 605 && evt.getY() < 688 && evt.getX() > 106 && evt.getX() < 872){
+		if(evt.getY() > 605 && evt.getY() < 688 && evt.getX() > 238 && evt.getX() < 740){
 			intMouseActive = 1;		
+			intDemoMouseActive = 1;
 		}
 	}
 /**

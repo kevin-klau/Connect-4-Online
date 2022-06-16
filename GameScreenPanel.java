@@ -159,49 +159,48 @@ public class GameScreenPanel extends JPanel{
 		g.drawString ("Chat:", 1280-250,80);
 		
 		//Drawing Static Tiles on Tray
-		g.drawImage(P2, 494, 635, null);
+		g.drawImage(P1, 494, 635, null);
 		g.drawImage(P1, 494, 615, null);
 		g.drawImage(P1, 469, 610, null);
-		g.drawImage(P2, 469, 610, null);
-		g.drawImage(P2, 520, 635, null);
+		g.drawImage(P1, 469, 610, null);
+		g.drawImage(P1, 520, 635, null);
 		g.drawImage(P1, 520, 615, null);
 		g.drawImage(P1, 440, 615, null);
-		g.drawImage(P2, 440, 635, null);
-		g.drawImage(P2, 410, 635, null);
-		g.drawImage(P2, 400, 635, null);
+		g.drawImage(P1, 440, 635, null);
+		g.drawImage(P1, 410, 635, null);
+		g.drawImage(P1, 400, 635, null);
 		g.drawImage(P1, 410, 615, null);
 		g.drawImage(P1, 400, 615, null);
 		g.drawImage(P1, 540, 615, null);
-		g.drawImage(P2, 540, 635, null);
+		g.drawImage(P1, 540, 635, null);
 		
 		g.drawImage(P1, 340, 635, null);
-		g.drawImage(P2, 340, 640, null);
+		g.drawImage(P1, 340, 640, null);
 		g.drawImage(P1, 320, 640, null);
 		g.drawImage(P1, 320, 630, null);
-		g.drawImage(P2, 300, 635, null);
+		g.drawImage(P1, 300, 635, null);
 		
-		g.drawImage(P2, 560, 635, null);
-		g.drawImage(P2, 565, 635, null);
+		g.drawImage(P1, 560, 635, null);
+		g.drawImage(P1, 565, 635, null);
 		g.drawImage(P1, 565, 632, null);
 		g.drawImage(P1, 580, 634, null);
-		g.drawImage(P2, 610, 635, null);
-		g.drawImage(P2, 630, 615, null);
+		g.drawImage(P1, 610, 635, null);
+		g.drawImage(P1, 630, 615, null);
 		g.drawImage(P1, 630, 635, null);
-		g.drawImage(P2, 660, 635, null);
-		g.drawImage(P2, 680, 615, null);
+		g.drawImage(P1, 660, 635, null);
+		g.drawImage(P1, 680, 615, null);
 		g.drawImage(P1, 700, 635, null);
 		g.drawImage(P1, 700, 615, null);
 		
 		g.drawImage(P1, 300, 615, null);
-		g.drawImage(P2, 270, 635, null);
-		g.drawImage(P2, 270, 615, null);
+		g.drawImage(P1, 270, 635, null);
+		g.drawImage(P1, 270, 615, null);
 		g.drawImage(P1, 250, 635, null);
-		g.drawImage(P2, 250, 615, null);
+		g.drawImage(P1, 250, 615, null);
 		g.drawImage(P1, 250, 640, null);
 		g.drawImage(P1, 220, 643, null);
-		g.drawImage(P2, 225, 630, null);
-		g.drawImage(P1, 200, 635, null);
-		g.drawImage(P2, 200, 615, null);
+		g.drawImage(P1, 225, 630, null);
+		
 		
 		// Calculate which row to drop it in
 		if(blnPersonDropped == true){
