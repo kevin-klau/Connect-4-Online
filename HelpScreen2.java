@@ -25,7 +25,6 @@ public class HelpScreen2 extends JPanel{
 	/** third text area*/	
 	JEditorPane helpText3;
 	
-	//Properties
 	// Image Properties
 	/** background image*/	
 	BufferedImage BG = null;
@@ -94,7 +93,7 @@ public class HelpScreen2 extends JPanel{
 	/** registered drop property*/
 	int intColumn;
 	/** allows for player to drop*/
-	boolean blnPersonDropped = false;
+	boolean blnPerson1Dropped = false;
 	/** indicates to the program when to do the animation*/
 	boolean blnDrawAnimationP1 = true;
 	/** allows for player to drop*/
@@ -143,7 +142,7 @@ public class HelpScreen2 extends JPanel{
 				intColumn = 6;
 			}
 			
-			blnPersonDropped = true;
+			blnPerson1Dropped = true;
 			//Repositioning tile after use
 			intP1X = 106 + 358 + 30;
 			intP1Y = 70 + 435 + 100 + 30;
@@ -191,7 +190,7 @@ public class HelpScreen2 extends JPanel{
 		g.drawImage(P2, 540, 635, null);
 		
 		// Calculate which row to drop it in
-		if(blnPersonDropped == true){
+		if(blnPerson1Dropped == true){
 			for (intCount = 5; intCount >= 0; intCount--){
 				if(strSlot[intCount][intColumn].equalsIgnoreCase ("empty")){
 					strSlot[intCount][intColumn] = "almost filled";
@@ -250,34 +249,34 @@ public class HelpScreen2 extends JPanel{
 	public HelpScreen2(){
 		super();
 		helpHeading = new JEditorPane("text/html", "");
-		helpHeading.setText("<h1>How to Play:</h1>");
+		helpHeading.setText("<font face=\"Arial\" size=\"15\">How to Play:</font>");
 		helpHeading.setEditable(false);
-		helpHeading.setSize(200,100);
-		helpHeading.setLocation(1080,0);
+		helpHeading.setSize(250,100);
+		helpHeading.setLocation(980,50);
 		helpHeading.setOpaque(false);
 		this.add(helpHeading);
 		
 		helpText = new JEditorPane("text/html", "");
-		helpText.setText("1. When it is your turn, put your <br> mouse over this area and drag <br> a piece");
+		helpText.setText("<font face=\"Arial\" size=\"5\">1. When it is your turn, put your <br> mouse over this area and drag <br> a piece</font>");
 		helpText.setEditable(false);
 		helpText.setSize(400,150);
-		helpText.setLocation(1080, 100);
+		helpText.setLocation(980, 100);
 		helpText.setOpaque(false);
 		this.add(helpText);
 		
 		helpText2 = new JEditorPane("text/html", "");
-		helpText2.setText("2. Drag the piece to your desired <br> column, and release the mouse");
+		helpText2.setText("<font face=\"Arial\" size=\"5\">2. Drag the piece to your desired <br> column, and release the mouse</font>");
 		helpText2.setEditable(false);
 		helpText2.setSize(400,150);
-		helpText2.setLocation(1080, 300);
+		helpText2.setLocation(980, 200);
 		helpText2.setOpaque(false);
 		this.add(helpText2);
 		
 		helpText3 = new JEditorPane("text/html", "");
-		helpText3.setText("3. Enjoy!");
+		helpText3.setText("<font face=\"Arial\" size=\"5\">3. Enjoy!</font>");
 		helpText3.setEditable(false);
 		helpText3.setSize(400,150);
-		helpText3.setLocation(1080, 500);
+		helpText3.setLocation(980, 300);
 		helpText3.setOpaque(false);
 		this.add(helpText3);			
 		
