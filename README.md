@@ -29,7 +29,7 @@ This project was created with:
 
 ***
 ## Collaboration:
-Connect 4:Remastered was developed by:
+Connect 4: Remastered was developed by:
 * Fergus Chu
 * Kevin Lau
 * Christopher Ng
