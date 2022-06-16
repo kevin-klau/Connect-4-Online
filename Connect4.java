@@ -472,7 +472,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		// Open the themes.txt File
 		BufferedReader themestxt = null;
 		try {
-			themestxt = new BufferedReader (new FileReader ("themes.txt"));
+			themestxt = new BufferedReader (new FileReader ("Themes/themes.txt"));
 		}catch (FileNotFoundException e){
 			System.out.println ("FILE NOT FOUND ERROR");
 		}		
@@ -505,7 +505,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		// Load the theme names into the array
 		// Open Array
 		try {
-			themestxt = new BufferedReader (new FileReader ("Themes.txt"));
+			themestxt = new BufferedReader (new FileReader ("Themes/Themes.txt"));
 		}catch (FileNotFoundException e){
 			System.out.println ("FILE NOT FOUND ERROR");
 		}		
