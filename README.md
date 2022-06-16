@@ -26,6 +26,7 @@ There are many tricks and strategies to win, but don't forget to look at the obv
 This project was created with:
 * Programming Language: Java
 * IDE: Geany
+* Graphic Software: Gimp 
 
 ***
 ## Collaboration:
