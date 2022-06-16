@@ -10,7 +10,7 @@ import javax.imageio.*;
 
 import java.io.*;
 /**
- * <h1>Game Screen Frontend</h1>
+ * <h1>Game Screen</h1>
  * <p>GUI for the Game Screen</p>
  */
 public class GameScreenPanel extends JPanel{
@@ -28,7 +28,7 @@ public class GameScreenPanel extends JPanel{
 	BufferedImage P1 = null;
 	/** player 2 image*/	
 	BufferedImage P2 = null;
-	/** blank image*/	
+
 	/** Boolean to indicate when to update images */
 	boolean blnImagesLoadOnce = false;
 	/** Theme indicator */
@@ -76,11 +76,15 @@ public class GameScreenPanel extends JPanel{
 	/** indicates when to send the server message*/
 	boolean blnSendInfo = false;
 	
-	
+	/** sends column of drop over the network*/	
 	int intInfoColumn;
+	/** indicates if game is finished, defaults to false*/	
 	boolean blnGameDone = false;
+	/** indicates if user will recieve winner message*/	
 	boolean blnWinnerMessage = false;
+	/** indicates if user has lost*/	
 	boolean blnGameDoneLoser = false;
+	/** indicates if array needs to restart*/	
 	boolean blnArrayRestart = true;	
 	
 	//Methods
@@ -335,7 +339,8 @@ public class GameScreenPanel extends JPanel{
 		//blnWinnerMessage = true;
 				
 	}
-/**
+ /**
+   * GameScreenPanel.java Constructor
    * <p>Load Connect4 board as empty, Read Images</p>
    */	
 	//Constructor
