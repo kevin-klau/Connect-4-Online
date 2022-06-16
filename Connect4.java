@@ -329,14 +329,12 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    * <p>Pickup of Pieces</p>
    */		
 	public void mouseDragged(MouseEvent evt){
-		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){	
-			
-				//Moving tile Player
-				if(intMouseActive == 1){
-					GSPanel.intP1X = evt.getX();
-					GSPanel.intP1Y = evt.getY();
-				}
-			
+		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){		
+			//Moving tile Player
+			if(intMouseActive == 1){
+				GSPanel.intP1X = evt.getX();
+				GSPanel.intP1Y = evt.getY();
+			}			
 		}
 	}
 	
@@ -587,6 +585,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		// Make the Chat Box
 		theScroll.setSize (300,720-25-100);
 		theScroll.setLocation (1280-300, 100);
+		theChatBox.setEditable (false);
 		GSPanel.add (theScroll);
 		
 		// The Turn Label
