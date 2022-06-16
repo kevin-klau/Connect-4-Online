@@ -255,7 +255,7 @@ public class GameScreenPanel extends JPanel{
 					// Change Turns
 					if (blnPlayerTurn == true){
 						blnPlayerTurn = false;
-						System.out.println ("Switched to false");
+						// System.out.println ("Switched to false");
 						// Send message to server
 						blnSendInfo = true;
 						intInfoColumn = intColumn;
@@ -286,25 +286,25 @@ public class GameScreenPanel extends JPanel{
 					if(intCount < 4){
 						//Statement so that you win if conditions met
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win horizontal");
+							// System.out.println("You win horizontal");
 							blnGameDone = true;
 							blnWinnerMessage = true;
 						}
 					}if(intCounter < 3){
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win Vertical");
+							// System.out.println("You win Vertical");
 							blnGameDone = true;
 							blnWinnerMessage = true;
 						}
 					}if(intCount < 4 && intCounter < 3){
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal left");
+							// System.out.println("You win diagonal left");
 							blnGameDone = true;
 							blnWinnerMessage = true;
 						}	
 					}if(intCount > 2 && intCounter < 3){
 						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal right");
+							// System.out.println("You win diagonal right");
 							blnGameDone = true;
 							blnWinnerMessage = true;
 						}	

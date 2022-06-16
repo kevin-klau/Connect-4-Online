@@ -200,6 +200,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			}else if (strSSMText[0].equalsIgnoreCase ("chat")){
 				// If they receive the chat messages, add it to the chat box
 				theChatBox.append (" "+strSSMText[1]+": "+strSSMText[2]+"\n");
+				theChatBox.setCaretPosition(theChatBox.getDocument().getLength());
 				
 			}else if (strSSMText[0].equalsIgnoreCase ("game") && strSSMText[1].equalsIgnoreCase ("drop")){
 				// Enemy places a piece
@@ -232,7 +233,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				// When the person clicks other person clicks play again, then you receive this message saying its ready to click play again
 				blnPlayAgain = true;
 				
-			}else if (ssm.readText().equalsIgnoreCase ("DISCONNECT")){
+			}else if (ssm.readText().equalsIgnoreCase ("DISCONNECTS")){
 				// If the server disconnects during the play again loading screen, return back to main menu
 				theFrame.setContentPane (theMainPanel);
 				theConnectButton.setEnabled (false);
@@ -240,7 +241,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			}
 			
 			// If they get ssm text just print it out for now
-			System.out.println (ssm.readText());
+			// System.out.println (ssm.readText());
 			
 		}else if (evt.getSource() == theReturnHomeButton){
 			// If they click the go back to home button in the loading screen, disconnect them and send them back home
@@ -254,8 +255,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			
 		}else if (evt.getSource() == theChatEnterField){
 			// If they use the chat function, send it over to the network and add it in the chatbox
-			ssm.sendText ("chat,"+theUserAsk.getText()+","+theChatEnterField.getText()); 
-			theChatBox.append (" "+theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			if (!theChatEnterField.getText().equalsIgnoreCase("")){
+				ssm.sendText ("chat,"+theUserAsk.getText()+","+theChatEnterField.getText()); 
+				theChatBox.append (" "+theUserAsk.getText()+": "+theChatEnterField.getText() + "\n");
+			}
+			theChatBox.setCaretPosition(theChatBox.getDocument().getLength());
 			theChatEnterField.setText ("");
 			
 		}else if (evt.getSource() == theSendHelpButton){
@@ -307,11 +311,15 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			GSPanel.blnArrayRestart = true;
 			GSPanel.blnSendInfo = false;
 			theConnectButton.setEnabled (false);
+			theLoadPanel.intNumberOfPlayersLoadedIn = 1;
+			
+			// Dissconnect them from the server
+			ssm.disconnect();
 			
 			theFrame.pack();
 			
 			if (strPersonConnect.equalsIgnoreCase ("Server")){
-				ssm.sendText ("DISCONNECT");
+				ssm.sendText ("DISCONNECTS");
 			}
 		}else if (evt.getSource() == returnHomeButton){
             // They click the return button in Help Menu 2, send them to the main menu
