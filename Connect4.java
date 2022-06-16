@@ -625,8 +625,8 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		returnHomeButton = new JButton();
         returnHomeButton.setSize(new Dimension(200, 100));
         returnHomeButton.setLocation(1050, 600);
+        returnHomeButton.setText("Return Home!");
         returnHomeButton.addActionListener (this);
-        returnHomeButton.setFont(theButtonFont);
         theHelpScreen2.add(returnHomeButton);
         
         // Add Actionlisteners
