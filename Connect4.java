@@ -335,6 +335,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
 			}			
+		}else if (theFrame.getContentPane() == theHelpScreen2){
+			// Demo Screen code
+			theHelpScreen2.intP1X = evt.getX();
+			theHelpScreen2.intP1Y = evt.getY();
+			
 		}
 	}
 	
