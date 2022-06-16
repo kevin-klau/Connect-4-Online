@@ -19,6 +19,8 @@ CONNECT 4 PIECES
 * Christmas
 * DualFlame
 
+<br> In fact, you can customize and name your own themes!!! Just remember to follow all the image sizes and to add the theme name in themes.txt!
+
 ***
 ## Technologies:
 This project was created with:
