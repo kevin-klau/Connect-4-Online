@@ -629,9 +629,12 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		
 		// The Help Menu 1 Continue Button
 		continueButton = new JButton();
-		continueButton.setSize(new Dimension(200, 100));
-		continueButton.setLocation(1000, 500);
+		continueButton.setSize(new Dimension(200, 50));
+		continueButton.setLocation(1050, 650);
 		continueButton.setText("Continue!");
+		continueButton.setHorizontalAlignment (JTextField.CENTER);
+		Font theHelpFont = new Font("Arial", Font.PLAIN, 25);
+		continueButton.setFont (theHelpFont);
 		theHelpScreen1.add(continueButton);
 		continueButton.addActionListener (this);
 		
@@ -641,9 +644,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		
 		// Add the return home button
 		returnHomeButton = new JButton();
-        returnHomeButton.setSize(new Dimension(200, 100));
-        returnHomeButton.setLocation(1050, 600);
+        returnHomeButton.setSize(new Dimension(200, 50));
+        returnHomeButton.setLocation(1050, 650);
         returnHomeButton.setText("Return Home!");
+        returnHomeButton.setHorizontalAlignment (JTextField.CENTER);
+        returnHomeButton.setFont (theHelpFont);
         returnHomeButton.addActionListener (this);
         theHelpScreen2.add(returnHomeButton);
         

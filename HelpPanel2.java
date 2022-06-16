@@ -247,7 +247,7 @@ public class HelpPanel2 extends JPanel{
 		this.add(helpHeading);
 		
 		helpText = new JEditorPane("text/html", "");
-		helpText.setText("<font face=\"Arial\" size=\"5\">1. When it is your turn, put your <br> mouse over this area and drag <br> a piece</font>");
+		helpText.setText("<font face=\"Arial\" size=\"5\">1. When it is your turn, put your <br> mouse over the tray area and drag <br> a piece</font>");
 		helpText.setEditable(false);
 		helpText.setSize(400,150);
 		helpText.setLocation(980, 100);
@@ -255,7 +255,7 @@ public class HelpPanel2 extends JPanel{
 		this.add(helpText);
 		
 		helpText2 = new JEditorPane("text/html", "");
-		helpText2.setText("<font face=\"Arial\" size=\"5\">2. Drag the piece to your desired <br> column, and release the mouse</font>");
+		helpText2.setText("<font face=\"Arial\" size=\"5\">2. Drag the piece over your desired <br> column, and release the mouse <br> button to drop the piece</font>");
 		helpText2.setEditable(false);
 		helpText2.setSize(400,150);
 		helpText2.setLocation(980, 200);
