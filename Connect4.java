@@ -58,6 +58,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	JButton continueButton;
 	JButton returnHomeButton;
 	
+	//Mouse Pressed Activation
+	int intMouseActive = 0;
+	
 	// Methods
 /**
    * <p>Invokes repaint everytime theTimer triggers ActionEvent/p>
@@ -327,13 +330,13 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    */		
 	public void mouseDragged(MouseEvent evt){
 		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){	
-			//Moving tile Player
-			GSPanel.intP1X = evt.getX();
-			GSPanel.intP1Y = evt.getY();
-		} else if (theFrame.getContentPane() == theHelpScreen2){	
-			//Moving tile Player
-			theHelpScreen2.intP1X = evt.getX();
-			theHelpScreen2.intP1Y = evt.getY();
+			
+				//Moving tile Player
+				if(intMouseActive == 1){
+					GSPanel.intP1X = evt.getX();
+					GSPanel.intP1Y = evt.getY();
+				}
+			
 		}
 	}
 	
@@ -380,9 +383,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
 				GSPanel.blnPlayerReleasedMouse = true;
+				intMouseActive = 0;
 			}else{
 				GSPanel.intP1X = -1000;
 				GSPanel.intP1Y = -1000;
+				intMouseActive = 0;
 			}
 		} else if (theFrame.getContentPane() == theHelpScreen2){
 			// Player drop in help menu
@@ -400,7 +405,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    * <p>Not in use</p>
    */	
 	public void mousePressed(MouseEvent evt){
-		
+		if(evt.getY() > 605 && evt.getY() < 688 && evt.getX() > 106 && evt.getX() < 872){
+			intMouseActive = 1;		
+		}
 	}
 /**
    * <p>Not in use</p>
