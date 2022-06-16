@@ -335,6 +335,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
 			}			
+		}else if (theFrame.getContentPane() == theHelpScreen2){
+			// Demo Screen code
+			theHelpScreen2.intP1X = evt.getX();
+			theHelpScreen2.intP1Y = evt.getY();
+			
 		}
 	}
 	
@@ -472,7 +477,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		// Open the themes.txt File
 		BufferedReader themestxt = null;
 		try {
-			themestxt = new BufferedReader (new FileReader ("themes.txt"));
+			themestxt = new BufferedReader (new FileReader ("Themes/themes.txt"));
 		}catch (FileNotFoundException e){
 			System.out.println ("FILE NOT FOUND ERROR");
 		}		
@@ -505,7 +510,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		// Load the theme names into the array
 		// Open Array
 		try {
-			themestxt = new BufferedReader (new FileReader ("Themes.txt"));
+			themestxt = new BufferedReader (new FileReader ("Themes/Themes.txt"));
 		}catch (FileNotFoundException e){
 			System.out.println ("FILE NOT FOUND ERROR");
 		}		
