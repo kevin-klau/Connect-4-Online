@@ -32,6 +32,16 @@ public class HelpPanel2 extends JPanel{
 	/** Theme indicator */
 	String strThemes = "Default";
 	
+	/** main heading*/
+	JEditorPane helpHeading;
+	/** first text area*/	
+	JEditorPane helpText;
+	/** second text area*/	
+	JEditorPane helpText2;
+	/** third text area*/	
+	JEditorPane helpText3;
+	
+	
 	// Player 1 XY Properties
 	/** default piece x-coordinate*/
 	int intP1X = 106 + 358 + 30;
@@ -203,6 +213,37 @@ public class HelpPanel2 extends JPanel{
 				strSlot[intCounter][intCount] = "empty";
 			}
 		}
+		helpHeading = new JEditorPane("text/html", "");
+		helpHeading.setText("<font face=\"Arial\" size=\"15\">How to Play:</font>");
+		helpHeading.setEditable(false);
+		helpHeading.setSize(250,100);
+		helpHeading.setLocation(980,50);
+		helpHeading.setOpaque(false);
+		this.add(helpHeading);
+		
+		helpText = new JEditorPane("text/html", "");
+		helpText.setText("<font face=\"Arial\" size=\"5\">1. When it is your turn, put your <br> mouse over this area and drag <br> a piece</font>");
+		helpText.setEditable(false);
+		helpText.setSize(400,150);
+		helpText.setLocation(980, 100);
+		helpText.setOpaque(false);
+		this.add(helpText);
+		
+		helpText2 = new JEditorPane("text/html", "");
+		helpText2.setText("<font face=\"Arial\" size=\"5\">2. Drag the piece to your desired <br> column, and release the mouse</font>");
+		helpText2.setEditable(false);
+		helpText2.setSize(400,150);
+		helpText2.setLocation(980, 200);
+		helpText2.setOpaque(false);
+		this.add(helpText2);
+		
+		helpText3 = new JEditorPane("text/html", "");
+		helpText3.setText("<font face=\"Arial\" size=\"5\">3. Enjoy!</font>");
+		helpText3.setEditable(false);
+		helpText3.setSize(400,150);
+		helpText3.setLocation(980, 300);
+		helpText3.setOpaque(false);
+		this.add(helpText3);	
 	}
 	
 		
