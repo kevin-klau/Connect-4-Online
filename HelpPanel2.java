@@ -13,9 +13,7 @@ import java.io.*;
  * <h1>Game Screen Frontend</h1>
  * <p>GUI for the Game Screen</p>
  */
-public class GameScreenPanel extends JPanel{
-
-
+public class HelpPanel2 extends JPanel{
 	//Properties
 	// Image Properties
 	/** background image*/	
@@ -73,15 +71,7 @@ public class GameScreenPanel extends JPanel{
 	boolean blnPlayerReleasedMouse = false;
 	/** indicates when it is the player turn*/
 	boolean blnPlayerTurn = true;
-	/** indicates when to send the server message*/
-	boolean blnSendInfo = false;
 	
-	
-	int intInfoColumn;
-	boolean blnGameDone = false;
-	boolean blnWinnerMessage = false;
-	boolean blnGameDoneLoser = false;
-	boolean blnArrayRestart = true;	
 	
 	//Methods
 /**
@@ -90,17 +80,6 @@ public class GameScreenPanel extends JPanel{
    */	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
-		if (blnArrayRestart == true){			
-			//Array Slots Set as Empty by Default
-			for(intCounter = 0; intCounter < 6; intCounter++){
-				for(intCount = 0; intCount < 7; intCount++){
-					strSlot[intCounter][intCount] = "empty";
-								
-				}
-			}
-			blnArrayRestart = false;
-		}
 		
 		if (blnPlayerReleasedMouse == true){
 			// Calculate which column it is dropped in
@@ -146,7 +125,7 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(BG, 0, 0, null);
 		g.drawImage(Board, 240, 70 + 100, null);
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
-		g.drawImage(P1, intP1X-25, intP1Y-25, null);
+		g.drawImage(P1, intP1X-25, intP1Y-25, null);	
 		
 		// Add the Chat Text Thing
 		g.setColor (new Color (240,240,240));
@@ -190,22 +169,12 @@ public class GameScreenPanel extends JPanel{
 		
 		// Draw Animation
 		if (blnDrawAnimationP1 == true){
-			if (blnPlayerTurn == true){
-				if (intP1DropY <= intP1DropYFinal){
-					g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
-					g.drawImage(Board, 240, 70 + 100, null);
-					intP1DropY = intP1DropY + 10;
-				}else{
-					blnDrawAnimationP1 = false;
-				}
-			}else if (blnPlayerTurn == false){
-				if (intP1DropY <= intP1DropYFinal){
-					g.drawImage(P2, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
-					g.drawImage(Board, 240, 70 + 100, null);
-					intP1DropY = intP1DropY + 10;
-				}else{
-					blnDrawAnimationP1 = false;
-				}
+			if (intP1DropY <= intP1DropYFinal){
+				g.drawImage(P1, intColumn * (14 + 50) + 31 + 240 , intP1DropY, null);
+				g.drawImage(Board, 240, 70 + 100, null);
+				intP1DropY = intP1DropY + 10;
+			}else{
+				blnDrawAnimationP1 = false;
 			}
 		}
 		
@@ -213,23 +182,8 @@ public class GameScreenPanel extends JPanel{
 		if (blnDrawAnimationP1 == false){
 			for (intCount = 5; intCount >= 0; intCount--){
 				if(strSlot[intCount][intColumn].equalsIgnoreCase ("almost filled")){
-					if (blnPlayerTurn == true){
-						strSlot[intCount][intColumn] = "filled P1";
-					}else if (blnPlayerTurn == false){
-						strSlot[intCount][intColumn] = "filled P2";
-					}
+					strSlot[intCount][intColumn] = "filled P1";
 					intCount = -1;
-					
-					// Change Turns
-					if (blnPlayerTurn == true){
-						blnPlayerTurn = false;
-						System.out.println ("Switched to false");
-						// Send message to server
-						blnSendInfo = true;
-						intInfoColumn = intColumn;
-					}else if (blnPlayerTurn == false){
-						blnPlayerTurn = true;
-					}
 				}
 			}
 		}
@@ -238,80 +192,24 @@ public class GameScreenPanel extends JPanel{
 		for(intCounter = 0; intCounter < 6; intCounter++){
 			for(intCount = 0; intCount < 7; intCount++){
 				if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1")){
-					g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-				}if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P2")){
-					g.drawImage(P2, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);
-						
+					g.drawImage(P1, intCount * (14 + 50) + 31 + 240 , intCounter * (14 + 50) + 31 + 170 , null);						
 				}
 			}
-		}
-		
-		//Winning If Statements
-		if (blnGameDone == false){
-			for(intCounter = 0; intCounter < 6; intCounter++){
-				for(intCount = 0; intCount < 7; intCount++){
-					//Statement so that array won't go out of bounds
-					if(intCount < 4){
-						//Statement so that you win if conditions met
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win horizontal");
-							blnGameDone = true;
-							blnWinnerMessage = true;
-						}
-					}if(intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win Vertical");
-							blnGameDone = true;
-							blnWinnerMessage = true;
-						}
-					}if(intCount < 4 && intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal left");
-							blnGameDone = true;
-							blnWinnerMessage = true;
-						}	
-					}if(intCount > 2 && intCounter < 3){
-						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
-							System.out.println("You win diagonal right");
-							blnGameDone = true;
-							blnWinnerMessage = true;
-						}	
-					}
-				}
-			}
-		}
-		
-		// If the game is done, draw either winner or loser
-		if (blnGameDone == true){
-			// Winner Screen
-			g.setColor (new Color (133,245,111));
-			g.fillRect (200,600-15,580,100);
-			
-			Font AnewFont = new Font ("Calibri", Font.PLAIN, 90);
-			g.setFont (AnewFont);
-			g.setColor (Color.BLACK);
-			g.drawString ("YOU WIN!!!", 280, 680-15);
-			
-		}else if (blnGameDoneLoser == true){
-			// Loser Screen
-			g.setColor (new Color (245,111,124));
-			g.fillRect (200,600-15,580,100);
-			
-			Font AnewFont = new Font ("Calibri", Font.PLAIN, 90);
-			g.setFont (AnewFont);
-			g.setColor (Color.BLACK);
-			g.drawString ("YOU LOST!!!", 270, 680-15);
-		}
-		//blnGameDone = true;
-		//blnWinnerMessage = true;
-				
+		}	
 	}
 /**
    * <p>Load Connect4 board as empty, Read Images</p>
    */	
 	//Constructor
-	public GameScreenPanel(){
+	public HelpPanel2(){
 		super();		
+			
+			//Array Slots Set as Empty by Default
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					strSlot[intCounter][intCount] = "empty";
+				}
+			}
 	}
 	
 		
@@ -322,3 +220,4 @@ public class GameScreenPanel extends JPanel{
 		
 		
 		
+

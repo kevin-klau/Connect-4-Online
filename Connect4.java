@@ -25,7 +25,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	LoadPanel theLoadPanel = new LoadPanel ();
 	GameScreenPanel GSPanel = new GameScreenPanel();
 	HelpScreen1 theHelpScreen1 = new HelpScreen1();
-	HelpScreen2 theHelpScreen2 = new HelpScreen2();
+	HelpPanel2 theHelpScreen2 = new HelpPanel2();
 	
 	// SuperSocketMaster
 	SuperSocketMaster ssm;
@@ -56,6 +56,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	
 	// Help Panel Components
 	JButton continueButton;
+	JButton returnHomeButton;
 	
 	// Methods
 /**
@@ -93,6 +94,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 					theFrame.pack();
 					ssm.sendText ("game,winner,"+theUserAsk.getText());
 				}
+				
+			}else if (theFrame.getContentPane() == theHelpScreen2){
+				theHelpScreen2.repaint();
 			}
 		
 		// If they use the JComboBox to change themes
@@ -304,7 +308,11 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			if (strPersonConnect.equalsIgnoreCase ("Server")){
 				ssm.sendText ("DISCONNECT");
 			}
-		}
+		}else if (evt.getSource() == returnHomeButton){
+            // They click the return button in Help Menu 2, send them to the main menu
+            theFrame.setContentPane(theMainPanel);
+            theFrame.pack();
+        }
 		
 	}
 	
@@ -319,11 +327,13 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    */		
 	public void mouseDragged(MouseEvent evt){
 		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){	
-			if(GSPanel.intPlayer == 1){
-				//Moving tile Player
-				GSPanel.intP1X = evt.getX();
-				GSPanel.intP1Y = evt.getY();
-			}
+			//Moving tile Player
+			GSPanel.intP1X = evt.getX();
+			GSPanel.intP1Y = evt.getY();
+		} else if (theFrame.getContentPane() == theHelpScreen2){	
+			//Moving tile Player
+			theHelpScreen2.intP1X = evt.getX();
+			theHelpScreen2.intP1Y = evt.getY();
 		}
 	}
 	
@@ -365,7 +375,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    */	
 	public void mouseReleased(MouseEvent evt){
 		if (theFrame.getContentPane() == GSPanel){
-			//Player drop
+			//Player drop in game menu
 			if(GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false && evt.getX() > 260 && evt.getX()<720 && evt.getY() > 140 && evt.getY() < 200){
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
@@ -373,6 +383,16 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			}else{
 				GSPanel.intP1X = -1000;
 				GSPanel.intP1Y = -1000;
+			}
+		} else if (theFrame.getContentPane() == theHelpScreen2){
+			// Player drop in help menu
+			if (evt.getX() > 260 && evt.getX()<720 && evt.getY() > 140 && evt.getY() < 200){
+				theHelpScreen2.intP1X = evt.getX();
+				theHelpScreen2.intP1Y = evt.getY();
+				theHelpScreen2.blnPlayerReleasedMouse = true;
+			}else{
+				theHelpScreen2.intP1X = -1000;
+				theHelpScreen2.intP1Y = -1000;
 			}
 		}
 	}
@@ -595,10 +615,24 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		continueButton.setLocation(1000, 500);
 		continueButton.setText("Continue!");
 		theHelpScreen1.add(continueButton);
+		continueButton.addActionListener (this);
 		
 		// The Help Menu 2
 		theHelpScreen2.setPreferredSize (new Dimension (1280,720));
 		theHelpScreen2.setLayout (null);
+		
+		// Add the return home button
+		returnHomeButton = new JButton();
+        returnHomeButton.setSize(new Dimension(200, 100));
+        returnHomeButton.setLocation(1050, 600);
+        returnHomeButton.addActionListener (this);
+        returnHomeButton.setFont(theButtonFont);
+        theHelpScreen2.add(returnHomeButton);
+        
+        // Add Actionlisteners
+        theHelpScreen2.addMouseMotionListener(this);
+		theHelpScreen2.addMouseListener(this);
+
 		
 		// Frame
 		theFrame.setContentPane(theMainPanel);
