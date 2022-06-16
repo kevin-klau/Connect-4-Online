@@ -137,10 +137,6 @@ public class HelpPanel2 extends JPanel{
 		g.drawImage(Tray, 240 - 134, 70 + 435 + 100, null);
 		g.drawImage(P1, intP1X-25, intP1Y-25, null);	
 		
-		// Add the Chat Text Thing
-		g.setColor (new Color (240,240,240));
-		g.fillRect (100,30,780,110);
-		
 		//Drawing Static Tiles on Tray
 		g.drawImage(P2, 494, 635, null);
 		g.drawImage(P1, 494, 615, null);
