@@ -38,7 +38,6 @@ public class GameScreen implements ActionListener, KeyListener, MouseMotionListe
 		
 	
 		//Moving tile Player
-		
 		GSPanel.intP1X = evt.getX();
 		GSPanel.intP1Y = evt.getY();
 		

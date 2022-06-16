@@ -57,9 +57,6 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	// Help Panel Components
 	JButton continueButton;
 	
-	//Mouse Pressed Activation
-	int intMouseActive = 0;
-	
 	// Methods
 /**
    * <p>Invokes repaint everytime theTimer triggers ActionEvent/p>
@@ -324,12 +321,8 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		if (theFrame.getContentPane() == GSPanel && GSPanel.blnPlayerTurn == true && GSPanel.blnGameDone == false){	
 			if(GSPanel.intPlayer == 1){
 				//Moving tile Player
-				if(intMouseActive == 1){
-					GSPanel.intP1X = evt.getX();
-					GSPanel.intP1Y = evt.getY();
-					
-					
-				}
+				GSPanel.intP1X = evt.getX();
+				GSPanel.intP1Y = evt.getY();
 			}
 		}
 	}
@@ -377,11 +370,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				GSPanel.intP1X = evt.getX();
 				GSPanel.intP1Y = evt.getY();
 				GSPanel.blnPlayerReleasedMouse = true;
-				intMouseActive = 0;
 			}else{
 				GSPanel.intP1X = -1000;
 				GSPanel.intP1Y = -1000;
-				intMouseActive = 0;
 			}
 		}
 	}
@@ -389,9 +380,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
    * <p>Not in use</p>
    */	
 	public void mousePressed(MouseEvent evt){
-		if(evt.getY() > 605 && evt.getY() < 688 && evt.getX() > 106 && evt.getX() < 872){
-			intMouseActive = 1;		
-		}
+		
 	}
 /**
    * <p>Not in use</p>
@@ -597,20 +586,19 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
         theGoBackHomeButton.addActionListener (this);
 		
 		// The Help Menu 1
-        theHelpScreen1.setPreferredSize (new Dimension (1280,720));
-        theHelpScreen1.setLayout (null);
-
-        // The Help Menu 1 Continue Button
-        continueButton = new JButton();
-        continueButton.setSize(new Dimension(200, 100));
-        continueButton.setLocation(1000, 500);
-        continueButton.addActionListener (this);
-        continueButton.setFont(theButtonFont);
-        theHelpScreen1.add(continueButton);
-
-        // The Help Menu 2
-        theHelpScreen2.setPreferredSize (new Dimension (1280,720));
-        theHelpScreen2.setLayout (null);
+		theHelpScreen1.setPreferredSize (new Dimension (1280,720));
+		theHelpScreen1.setLayout (null);
+		
+		// The Help Menu 1 Continue Button
+		continueButton = new JButton();
+		continueButton.setSize(new Dimension(200, 100));
+		continueButton.setLocation(1000, 500);
+		continueButton.setText("Continue!");
+		theHelpScreen1.add(continueButton);
+		
+		// The Help Menu 2
+		theHelpScreen2.setPreferredSize (new Dimension (1280,720));
+		theHelpScreen2.setLayout (null);
 		
 		// Frame
 		theFrame.setContentPane(theMainPanel);
