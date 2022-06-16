@@ -190,6 +190,36 @@ public class GameScreenPanel extends JPanel{
 		g.drawImage(P1, 540, 615, null);
 		g.drawImage(P2, 540, 635, null);
 		
+		g.drawImage(P1, 340, 635, null);
+		g.drawImage(P2, 340, 640, null);
+		g.drawImage(P1, 320, 640, null);
+		g.drawImage(P1, 320, 630, null);
+		g.drawImage(P2, 300, 635, null);
+		
+		g.drawImage(P2, 560, 635, null);
+		g.drawImage(P2, 565, 635, null);
+		g.drawImage(P1, 565, 632, null);
+		g.drawImage(P1, 580, 634, null);
+		g.drawImage(P2, 610, 635, null);
+		g.drawImage(P2, 630, 615, null);
+		g.drawImage(P1, 630, 635, null);
+		g.drawImage(P2, 660, 635, null);
+		g.drawImage(P2, 680, 615, null);
+		g.drawImage(P1, 700, 635, null);
+		g.drawImage(P1, 700, 615, null);
+		
+		g.drawImage(P1, 300, 615, null);
+		g.drawImage(P2, 270, 635, null);
+		g.drawImage(P2, 270, 615, null);
+		g.drawImage(P1, 250, 635, null);
+		g.drawImage(P2, 250, 615, null);
+		g.drawImage(P1, 250, 640, null);
+		g.drawImage(P1, 220, 643, null);
+		g.drawImage(P2, 225, 630, null);
+		g.drawImage(P1, 200, 635, null);
+		g.drawImage(P2, 200, 615, null);
+		
+		
 		// Calculate which row to drop it in
 		if(blnPersonDropped == true){
 			for (intCount = 5; intCount >= 0; intCount--){
