@@ -25,6 +25,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	LoadPanel theLoadPanel = new LoadPanel ();
 	GameScreenPanel GSPanel = new GameScreenPanel();
 	HelpScreen1 theHelpScreen1 = new HelpScreen1();
+	HelpScreen2 theHelpScreen2 = new HelpScreen2();
 	
 	// SuperSocketMaster
 	SuperSocketMaster ssm;
@@ -51,6 +52,9 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	JLabel theTurnLabel = new JLabel();
 	JButton thePlayAgainButton = new JButton("Play Again!");
 	JButton theGoBackHomeButton = new JButton("Main Menu!");
+	
+	// Help Panel Components
+	JButton continueButton;
 	
 	// Methods
 /**
@@ -215,6 +219,10 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			theFrame.setContentPane(theHelpScreen1);
 			theFrame.pack();
 			
+		}else if (evt.getSource() == continueButton){
+			// They click the continue button in Help Menu 1
+			theFrame.setContentPane(theHelpScreen2);
+			theFrame.pack();
 		}
 		
 	}
@@ -485,6 +493,16 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		theHelpScreen1.setPreferredSize (new Dimension (1280,720));
 		theHelpScreen1.setLayout (null);
 		
+		// The Help Menu 1 Continue Button
+		continueButton = new JButton();
+		continueButton.setSize(new Dimension(200, 100));
+		continueButton.setLocation(1000, 500);
+		continueButton.setText("Continue!");
+		theHelpScreen1.add(continueButton);
+		
+		// The Help Menu 2
+		theHelpScreen2.setPreferredSize (new Dimension (1280,720));
+		theHelpScreen2.setLayout (null);
 		
 		// Frame
 		theFrame.setContentPane(theMainPanel);

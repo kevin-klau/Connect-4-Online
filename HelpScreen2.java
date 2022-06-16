@@ -28,14 +28,9 @@ public class HelpScreen2 extends JPanel{
 		super();
 		
 							
-			}
-		}
-		
 	}
-	
-		
-		
-}
+}		
+
 		
 		
 		

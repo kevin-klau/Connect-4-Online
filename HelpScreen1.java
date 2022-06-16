@@ -27,16 +27,12 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	JEditorPane helpText;
 	/** second text area*/	
 	JEditorPane helpText2;
-	/** continues to next help page*/	
-	JButton continueButton;
+	
 	
 	//Methods
 	/** not in use*/
 	public void actionPerformed(ActionEvent evt){
-		if (evt.getSource() == continueButton){
-			Connect4.theFrame.setContentPane(theHelpScreen2);
-			Connect4.theFrame.pack();
-		}
+		
 	}
 	
 	/** paints images on the GUI*/
@@ -84,10 +80,5 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 		helpText2.setOpaque(false);
 		this.add(helpText2);
 		
-		continueButton = new JButton();
-		continueButton.setSize(new Dimension(200, 100));
-		continueButton.setLocation(1000, 500);
-		continueButton.setText("Continue!");
-		this.add(continueButton);
 	}
 }
