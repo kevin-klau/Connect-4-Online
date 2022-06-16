@@ -102,6 +102,9 @@ public class GameScreenPanel extends JPanel{
 	
 	int intInfoColumn;
 	boolean blnGameDone = false;
+	boolean blnWinnerMessage = false;
+	boolean blnGameDoneLoser = false;
+	boolean blnArrayRestart = true;
 	
 	//Turns
 	/** player turn variable, starts at 1*/	
@@ -115,6 +118,17 @@ public class GameScreenPanel extends JPanel{
    */	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		
+		if (blnArrayRestart == true){			
+			//Array Slots Set as Empty by Default
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					strSlot[intCounter][intCount] = "empty";
+								
+				}
+			}
+			blnArrayRestart = false;
+		}
 		
 		if (blnPlayerReleasedMouse == true){
 			// Calculate which column it is dropped in
@@ -263,35 +277,63 @@ public class GameScreenPanel extends JPanel{
 		}
 		
 		//Winning If Statements
-		for(intCounter = 0; intCounter < 6; intCounter++){
-			for(intCount = 0; intCount < 7; intCount++){
-				//Statement so that array won't go out of bounds
-				if(intCount < 4){
-					//Statement so that you win if conditions met
-					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
-						System.out.println("You win horizontal");
-						blnGameDone = true;
+		if (blnGameDone == false){
+			for(intCounter = 0; intCounter < 6; intCounter++){
+				for(intCount = 0; intCount < 7; intCount++){
+					//Statement so that array won't go out of bounds
+					if(intCount < 4){
+						//Statement so that you win if conditions met
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 1].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 2].equalsIgnoreCase("filled P1") && strSlot[intCounter][intCount + 3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win horizontal");
+							blnGameDone = true;
+							blnWinnerMessage = true;
+						}
+					}if(intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win Vertical");
+							blnGameDone = true;
+							blnWinnerMessage = true;
+						}
+					}if(intCount < 4 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win diagonal left");
+							blnGameDone = true;
+							blnWinnerMessage = true;
+						}	
+					}if(intCount > 2 && intCounter < 3){
+						if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
+							System.out.println("You win diagonal right");
+							blnGameDone = true;
+							blnWinnerMessage = true;
+						}	
 					}
-				}if(intCounter < 3){
-					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 1][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +2][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter + 3][intCount].equalsIgnoreCase("filled P1") ){
-						System.out.println("You win Vertical");
-						blnGameDone = true;
-					}
-				}if(intCount < 4 && intCounter < 3){
-					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter+1][intCount+1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount+2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount+3].equalsIgnoreCase("filled P1") ){
-						System.out.println("You win diagonal left");
-						blnGameDone = true;
-					}	
-				}if(intCount > 2 && intCounter < 3){
-					if(strSlot[intCounter][intCount].equalsIgnoreCase("filled P1") && strSlot[intCounter +1][intCount-1].equalsIgnoreCase("filled P1") && strSlot[intCounter+2][intCount-2].equalsIgnoreCase("filled P1") && strSlot[intCounter+3][intCount-3].equalsIgnoreCase("filled P1") ){
-						System.out.println("You win diagonal right");
-						blnGameDone = true;
-					}	
 				}
 			}
 		}
 		
 		// If the game is done, draw either winner or loser
+		if (blnGameDone == true){
+			// Winner Screen
+			g.setColor (new Color (133,245,111));
+			g.fillRect (200,600-15,580,100);
+			
+			Font AnewFont = new Font ("Calibri", Font.PLAIN, 90);
+			g.setFont (AnewFont);
+			g.setColor (Color.BLACK);
+			g.drawString ("YOU WIN!!!", 280, 680-15);
+			
+		}else if (blnGameDoneLoser == true){
+			// Loser Screen
+			g.setColor (new Color (245,111,124));
+			g.fillRect (200,600-15,580,100);
+			
+			Font AnewFont = new Font ("Calibri", Font.PLAIN, 90);
+			g.setFont (AnewFont);
+			g.setColor (Color.BLACK);
+			g.drawString ("YOU LOST!!!", 270, 680-15);
+		}
+		//blnGameDone = true;
+		//blnWinnerMessage = true;
 				
 	}
 /**
@@ -299,16 +341,7 @@ public class GameScreenPanel extends JPanel{
    */	
 	//Constructor
 	public GameScreenPanel(){
-		super();
-		
-		//Array Slots Set as Empty by Default
-		for(intCounter = 0; intCounter < 6; intCounter++){
-			for(intCount = 0; intCount < 7; intCount++){
-				strSlot[intCounter][intCount] = "empty";
-							
-			}
-		}
-		
+		super();		
 	}
 	
 		
