@@ -44,6 +44,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	
 	// Load Panel Components
 	JButton theReturnHomeButton = new JButton ("Return To Home");
+	Boolean blnPlayAgain = false;
 	
 	// GamePanel Components
 	JTextField theChatEnterField = new JTextField ();
@@ -87,11 +88,13 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 				}
 				
 				// End the Game when 1 player wins
-				if (GSPanel.blnGameDone == true){
+				if (GSPanel.blnWinnerMessage == true){
 					ssm.sendText ("game,winner,"+theUserAsk.getText());
 					GSPanel.add (thePlayAgainButton);
 					GSPanel.add (theGoBackHomeButton);
-					GSPanel.blnGameDone = false;
+					GSPanel.blnWinnerMessage = false;
+					theFrame.pack();
+					ssm.sendText ("game,winner,"+theUserAsk.getText());
 				}
 			}
 		
@@ -195,7 +198,39 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			}else if (strSSMText[0].equalsIgnoreCase ("game") && strSSMText[1].equalsIgnoreCase ("drop")){
 				// Enemy places a piece
 				GSPanel.intColumn = Integer.parseInt(strSSMText[2]);
-				GSPanel.blnPersonDropped = true;				
+				GSPanel.blnPersonDropped = true;		
+						
+			}else if (strSSMText[0].equalsIgnoreCase ("game") && strSSMText[1].equalsIgnoreCase ("winner")){
+				// When the enemy wins, end the game and add the buttons
+				GSPanel.add (thePlayAgainButton);
+				GSPanel.add (theGoBackHomeButton);
+				GSPanel.blnGameDoneLoser = true;	
+							
+			}else if (strSSMText[0].equalsIgnoreCase ("game") && strSSMText[1].equalsIgnoreCase ("rematch")){
+				if (blnPlayAgain == true){
+					// Set the screen to the game
+					theFrame.setContentPane (GSPanel);
+					
+					// Restart everything
+					GSPanel.remove (thePlayAgainButton);
+					GSPanel.remove (theGoBackHomeButton);
+					GSPanel.blnGameDone = false;
+					GSPanel.blnWinnerMessage = false;
+					GSPanel.blnGameDoneLoser = false;
+					GSPanel.blnArrayRestart = true;
+					GSPanel.blnSendInfo = false;
+					
+					theFrame.pack();
+				}
+				
+				// When the person clicks other person clicks play again, then you receive this message saying its ready to click play again
+				blnPlayAgain = true;
+				
+			}else if (ssm.readText().equalsIgnoreCase ("DISCONNECT")){
+				// If the server disconnects during the play again loading screen, return back to main menu
+				theFrame.setContentPane (theMainPanel);
+				theConnectButton.setEnabled (false);
+				theFrame.pack();
 			}
 			
 			// If they get ssm text just print it out for now
@@ -226,6 +261,52 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 			// They click the continue button in Help Menu 1
 			theFrame.setContentPane(theHelpScreen2);
 			theFrame.pack();
+			
+		}else if (evt.getSource() == thePlayAgainButton){
+			// If they click the play again button, send them back to the loading screen
+			theFrame.setContentPane (theLoadPanel);
+			theFrame.pack();
+			
+			theLoadPanel.intNumberOfPlayersLoadedIn = 1;
+			ssm.sendText ("game,rematch,"+theUserAsk.getText());
+			
+			if (blnPlayAgain == true){
+				// Set the screen to the game
+				theFrame.setContentPane (GSPanel);
+				
+				// Restart everything
+				GSPanel.remove (thePlayAgainButton);
+				GSPanel.remove (theGoBackHomeButton);
+				GSPanel.blnGameDone = false;
+				GSPanel.blnWinnerMessage = false;
+				GSPanel.blnGameDoneLoser = false;
+				GSPanel.blnArrayRestart = true;
+				GSPanel.blnSendInfo = false;
+				
+				theFrame.pack();
+			}
+			
+			blnPlayAgain = true;
+			
+		} else if (evt.getSource() == theGoBackHomeButton){
+			// Go Back Home Button
+			theFrame.setContentPane (theMainPanel);
+			
+			// Restart everything
+			GSPanel.remove (thePlayAgainButton);
+			GSPanel.remove (theGoBackHomeButton);
+			GSPanel.blnGameDone = false;
+			GSPanel.blnWinnerMessage = false;
+			GSPanel.blnGameDoneLoser = false;
+			GSPanel.blnArrayRestart = true;
+			GSPanel.blnSendInfo = false;
+			theConnectButton.setEnabled (false);
+			
+			theFrame.pack();
+			
+			if (strPersonConnect.equalsIgnoreCase ("Server")){
+				ssm.sendText ("DISCONNECT");
+			}
 		}
 		
 	}
@@ -499,6 +580,21 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 		Font newFont = new Font ("Calibri", Font.PLAIN, 100);
 		theTurnLabel.setFont (newFont);
 		GSPanel.add (theTurnLabel);
+		
+		// Add the Play Again Button
+		thePlayAgainButton.setSize (140,40);
+		theFont = new Font("Arial", Font.PLAIN, 15);
+        thePlayAgainButton.setFont(theFont);
+        thePlayAgainButton.setLocation (30, 615);
+        thePlayAgainButton.setHorizontalAlignment (JTextField.CENTER);
+        thePlayAgainButton.addActionListener (this);
+        
+        // Add the Return to home button
+        theGoBackHomeButton.setSize (140,40);
+        theGoBackHomeButton.setFont(theFont);
+        theGoBackHomeButton.setLocation (810, 615);
+        theGoBackHomeButton.setHorizontalAlignment (JTextField.CENTER);
+        theGoBackHomeButton.addActionListener (this);
 		
 		// The Help Menu 1
         theHelpScreen1.setPreferredSize (new Dimension (1280,720));
