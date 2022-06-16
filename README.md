@@ -11,7 +11,7 @@ Connect 4. The simple yet intense multiplayer 1v1 game...
 
 CONNECT 4 PIECES
 
-<br>There are many tricks and strategies to win, but don't forget to look at the obvious<br/>
+There are many tricks and strategies to win, but don't forget to look at the obvious<br/>
 
 <br>There are many themes to choose from:
 * Connect 4
