@@ -33,7 +33,10 @@ public class HelpScreen1 extends JPanel implements ActionListener{
 	//Methods
 	/** not in use*/
 	public void actionPerformed(ActionEvent evt){
-		
+		if (evt.getSource() == continueButton){
+			Connect4.theFrame.setContentPane(theHelpScreen2);
+			Connect4.theFrame.pack();
+		}
 	}
 	
 	/** paints images on the GUI*/
