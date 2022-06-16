@@ -64,7 +64,8 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	
 	// Methods
 /**
-   * <p>Invokes repaint everytime theTimer triggers ActionEvent/p>
+   * <p>Action Listener</p>
+   * adds evt and ssm functionality
    */
 	public void actionPerformed (ActionEvent evt){
 		// Add the repaint function
@@ -669,7 +670,7 @@ public class Connect4 implements ActionListener, KeyListener, MouseMotionListene
 	// Main Program
 /**
    * Main Program
-   * @param args TBD
+   * @param args args
    */		
 	public static void main (String[]args){
 		new Connect4();

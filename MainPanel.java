@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
- * <h1>Connect 4 Frontend</h1>
+ * <h1>Connect 4</h1>
  * Images for the Main Screen
  */
 public class MainPanel extends JPanel{
@@ -74,7 +74,7 @@ public class MainPanel extends JPanel{
 		
 	}
 /**
- * imports past (TBD)
+ * MainPanel.java Constructor
  */	
 	// Constructor
 	public MainPanel(){

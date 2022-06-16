@@ -10,8 +10,8 @@ import javax.imageio.*;
 
 import java.io.*;
 /**
- * <h1>Game Screen Frontend</h1>
- * <p>GUI for the Game Screen</p>
+ * <h1>Second Help Screen</h1>
+ * <p>GUI for the Help Panel 2</p>
  */
 public class HelpPanel2 extends JPanel{
 	//Properties
@@ -226,6 +226,7 @@ public class HelpPanel2 extends JPanel{
 		}	
 	}
 /**
+   * HelpPanel2.java Constructor
    * <p>Load Connect4 board as empty, Read Images</p>
    */	
 	//Constructor

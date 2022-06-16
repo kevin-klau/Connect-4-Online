@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 /**
-   * LoadPanel Placeholder
+   * Loading Screen
    */		
 public class LoadPanel extends JPanel{
 	// Properties
@@ -91,8 +91,8 @@ public class LoadPanel extends JPanel{
 	}
 	
 	// Constructor
-/**
-   *  imports past (TBD)
+ /**
+   *  LoadPanel.java Constructor
    */		
 	public LoadPanel(){
 		super();
