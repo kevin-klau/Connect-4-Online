@@ -1,4 +1,4 @@
-Connect4
+Default
 Halloween
 Christmas
 DualFlame
