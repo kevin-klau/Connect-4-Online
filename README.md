@@ -25,6 +25,7 @@ There are many tricks and strategies to win, but don't forget to look at the obv
 ## Technologies:
 This project was created with:
 * Programming Language: Java
+* Libraries Used: Java.Awt / Java.Awt.Swing
 * IDE: Geany
 * Graphic Software: Gimp 
 
